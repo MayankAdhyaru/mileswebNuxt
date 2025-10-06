@@ -43,7 +43,7 @@ const hero = {
   strikePrice: false,
   price: "149.00",
   billingCycle: "/mo",
-  freeMonthsText: "+ 3 Months Free",
+  freeMonthsText: "+3 months free",
   showTimer: false,
   showFreeTrial: false,
   guarantee: "30",

@@ -19,7 +19,7 @@
                                     <ul class="mw-navigation-show-ul">
         
                                         <!-- Hosting -->
-                                        <li class="mw-menu-dropdown">
+                                        <li class="mw-menu-dropdown"  :class="{ 'mw-menu-active': openDropdown === 'hosting' }">
                                             <div class="mw-menu-tabs" @click="toggleDropdown('hosting')">Hosting<span class="mw-menu-tab-dwn" v-html="headerArrow"></span>
                                             </div>
                                             <div v-show="openDropdown === 'hosting'" class="mw-submenu">
@@ -51,7 +51,7 @@
                                         </li>
         
                                         <!-- WordPress -->
-                                        <li class="mw-menu-dropdown">
+                                        <li class="mw-menu-dropdown"  :class="{ 'mw-menu-active': openDropdown === 'wordpress' }">
                                             <div class="mw-menu-tabs" @click="toggleDropdown('wordpress')">WordPress<span class="mw-menu-tab-dwn" v-html="headerArrow"></span>
                                             </div>
                                             <div v-show="openDropdown === 'wordpress'" class="mw-submenu">
@@ -69,7 +69,7 @@
                                             </div>
                                         </li>
                                         <!-- VPS -->
-                                        <li class="mw-menu-dropdown">
+                                        <li class="mw-menu-dropdown" :class="{ 'mw-menu-active': openDropdown === 'vps' }">
                                             <div class="mw-menu-tabs" @click="toggleDropdown('vps')">VPS & Dedicated<span class="mw-menu-tab-dwn" v-html="headerArrow"></span>
                                             </div>
                                             <div v-show="openDropdown === 'vps'" class="mw-submenu">
@@ -99,7 +99,7 @@
                                             </div>
                                         </li>
                                         <!-- Domain -->
-                                        <li class="mw-menu-dropdown">
+                                        <li class="mw-menu-dropdown" :class="{ 'mw-menu-active': openDropdown === 'domain' }">
                                             <div class="mw-menu-tabs" @click="toggleDropdown('domain')">Domain & Email<span class="mw-menu-tab-dwn" v-html="headerArrow"></span>
                                             </div>
                                             <div v-show="openDropdown === 'domain'" class="mw-submenu">
@@ -121,7 +121,7 @@
                                             </div>
                                         </li>
                                         <!-- Support -->
-                                        <li class="mw-menu-dropdown">
+                                        <li class="mw-menu-dropdown" :class="{ 'mw-menu-active': openDropdown === 'support' }">
                                             <div class="mw-menu-tabs" @click="toggleDropdown('support')">Support<span class="mw-menu-tab-dwn" v-html="headerArrow"></span>
                                             </div>
                                             <div v-show="openDropdown === 'support'" class="mw-submenu">
@@ -148,7 +148,7 @@
                                             <NuxtLink class="mw-navigation-show-a" to="/hosting/"><div class="mw-menu-tabs mw-menu-wi-tabs">Pricing</div></NuxtLink>
                                         </li>
                                         <li>
-                                            <a class="mw-sub-content-lnk" target="_blank"  to="https://my.milesweb.com/clientarea.php"><span class="mw_user_icon">Log In</span></a>
+                                            <a class="d-flex" target="_blank"  to="https://my.milesweb.com/clientarea.php"><span class="mw_user_icon">Log In</span></a>
                                         </li>
                                         <li class="mw-flag-dropdown-small">
                                             <div class="mw-flag-dropdown">
@@ -209,11 +209,18 @@ function toggleDropdown(menu) {
 
 // Close nav if click outside
 function handleClickOutside(event) {
-  const nav = document.querySelector('.mw-navigation-show')
-  if (nav && !nav.contains(event.target)) {
-    isNavOpen.value = false
-    openDropdown.value = null
-  }
+    const nav = document.querySelector('.mw-navigation-show')
+    const toggleBtn = document.querySelector('.mw_menu_toggle')
+    const target = event.target
+
+    // If clicked inside the nav or on the toggle button, do nothing.
+    const clickedInsideNav = nav && nav.contains(target)
+    const clickedOnToggle = toggleBtn && toggleBtn.contains(target)
+
+    if (!clickedInsideNav && !clickedOnToggle) {
+        isNavOpen.value = false
+        openDropdown.value = null
+    }
 }
 
 // Close nav on ESC key
@@ -241,12 +248,12 @@ onBeforeUnmount(() => {
 
 <style scoped>
 /* Hide dropdowns by default (v-show will inline style display:block) */
-.mw-navigation-show {
+/* .mw-navigation-show {
   display: none;
-}
+} */
 
-.mw-navigation-show.mw-active {
+/* .mw-navigation-show.mw-active {
   display: block;
-}
+} */
 .mw-dark-menu .mw-menu{background:#060815!important}.mw-dark-menu .mw-menu-logo-1{display:none!important}.mw-dark-menu .mw-menu-logo-1.mw-menu-logo-2{display:none!important}.mw-dark-menu .mw-menu-logo-1.mw-menu-logo-2{display:block!important}.mw-dark-menu .mw-menu-tabs:hover::after{background:#252733}.mw-dark-menu .mw-navigation-toggle span{border-color:#fff!important}.mw-dark-menu .mw-menu-tabs{color:#fff!important}.mw-dark-menu .mw-menu-tab-dwn svg path{stroke:#fff!important}.mw-dark-menu{color:#fff}.mw-dark-menu .mw-menu-login{color:#fff;border-color:#fff}.mw-dark-menu .mw-menu-login:hover{background:#252733;border-color:#fff}.mw-menu-login{color:var(--ttl_clr);border-color:var(--ttl_clr)}.mw-menu-login:hover{background:#f0f0ff;border-color:#252733}.mw-dark-menu .mw-menu-logo-2{display:none}.mw-menu-logo-2{display:none}@media(max-width:1140px){.mw-dark-menu .mw-navigation-show-ul{background:#060815}.mw-dark-menu .mw-menu-active .mw-menu-tabs,.mw-dark-menu .mw-menu-tabs:hover{background:#312e42}.mw-dark-menu .mw-submenu{background:#060815}.mw-dark-menu .mw-sub-content-lnk{color:#fff}.mw-dark-menu .mw_user_icon{border-color:#fff!important;color:#fff!important}.mw-dark-menu .mw-sub-content-li p{color:#cecbd8}.mw-dark-menu .mw-sub-content-li:hover{background:#160f3c}.mw-dark-menu .mw-sub-content-li:hover{background:#1b1136!important}.mw-dark-menu .mw_user_icon:hover{background:#312e42!important;border-color:#fff!important}.mw_user_icon:hover{background:#f0f0ff}}#mw-offer-timer{display:none}.mw-tooltip-text{color:var(--ttl_clr)!important}@media(max-width:1024px){.mw-ban-dark-bg{padding-top:0}}@media(max-height:768px) and (min-width:1250px){.mw-ban-dark-bg{padding-top:20px;}.mw-ban-img{max-width:600px}}@media(max-height:650px) and (min-width:1250px){.mw-ban-container{padding-top:12px}.mw-ban-price-row{padding:12px 0 32px}.re_month_free{padding-bottom:20px}}
 </style>
