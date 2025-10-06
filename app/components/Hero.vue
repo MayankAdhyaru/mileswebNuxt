@@ -16,7 +16,20 @@
             <div class="re-banner-list pt-25">
               <ul class="re-ban-list_1 mw-row p-0">
                 <li v-for="(feature, i) in features" :key="i" class="mw-row-align">
-                  <span>{{ feature }}</span>
+                    <!-- If feature is an object with a `tip`, render Tooltip component -->
+                    <component
+                      v-if="feature && typeof feature === 'object' && feature.tip"
+                      :is="Tooltip"
+                      :tip="feature.tip"
+                      :position="feature.position || 'bottom'"
+                    >
+                      {{ feature.text}}
+                    </component>
+
+                    <!-- Otherwise render plain text -->
+                    <template v-else>
+                      <span>{{ feature }}</span>
+                    </template>
                 </li>
               </ul>
             </div>
@@ -102,6 +115,8 @@
 </template>
 
 <script setup>
+import Tooltip from '~/components/Tooltip.vue'
+
 defineProps({
 // Heading: string for content, false to hide
   heading: { type: [String, Boolean], default: false },

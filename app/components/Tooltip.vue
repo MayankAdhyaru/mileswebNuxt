@@ -1,6 +1,6 @@
 <template>
   <span 
-    class="mw-hov-tooltip-btn ml0 relative inline-block"
+    class="mw-hov-tooltip-btn relative inline-block"
     @mouseenter="showTooltip"
     @mouseleave="hideTooltip"
     ref="trigger"
@@ -56,24 +56,28 @@ function positionTooltip() {
   switch (props.position) {
     case 'top':
       style = {
+        opacity: 1,
         left: `${tRect.width / 2 - ttRect.width / 2}px`,
         top: `-${ttRect.height + 10}px`
       }
       break
     case 'bottom':
       style = {
+        opacity: 1,
         left: `${tRect.width / 2 - ttRect.width / 2}px`,
         top: `${tRect.height + 10}px`
       }
       break
     case 'left':
       style = {
+        opacity: 1,
         left: `-${ttRect.width + 10}px`,
         top: `${tRect.height / 2 - ttRect.height / 2}px`
       }
       break
     case 'right':
       style = {
+        opacity: 1,
         left: `${tRect.width + 10}px`,
         top: `${tRect.height / 2 - ttRect.height / 2}px`
       }
