@@ -1,6 +1,8 @@
 <script setup>
 import Hero from '~/components/Hero.vue'
+import { useCommon } from '~/composables/useCommon';
 
+const common = useCommon();
 // SEO for this page
 useHead({
   title: "India's Best Web Hosting Company | 76% OFF Web Hosting Services",
@@ -35,8 +37,8 @@ useHead({
 
 // ✅ Inline data (instead of external file)
 const hero = {
-  heading: "<h1>Web Hosting India</h1> - Up to 76% off",
-  headingH1: "<h1>Web Hosting India</h1> - Up to 76% off",
+  heading: `<h1>Web Hosting India</h1> - Up to  ${common.getDiscount('web_hosting_discount')} off`,
+  headingH1: `<h1>Web Hosting India</h1> - Up to  ${common.getDiscount('web_hosting_discount')} off`,
   subheading: "<h2>Get fast and reliable hosting </h2> + Free domain",
   features: [
     "Free SSL and website migration",
@@ -47,13 +49,15 @@ const hero = {
       tip: `<img class="img-fluid pb-10" src="/assets/images/mw/tooltip/support.avif" alt="24/7 expert support | MilesWeb India" title="24/7 expert support | MilesWeb India" loading="lazy" width="355" height="159">Get real help, anytime! Our 24/7 expert support is available via live chat, email, and tickets—no chatbots, just real people.`
     }
   ],
-  currency: "₹",
+  currency: common.currencySymbol,
   strikePrice: false,
-  price: "149.00",
+  price: common.price.web_2[1],
   billingCycle: "/mo",
   freeMonthsText: "+3 months free",
   showTimer: false,
   showFreeTrial: false,
+  plansBtn: "Start now",
+  showPrice: true,
 guarantee: {
   text: 30,
   position: "bottom",

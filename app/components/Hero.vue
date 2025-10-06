@@ -104,7 +104,7 @@
       <!-- Partners -->
       <div class="mw_partners">
         <div class="mw_partners_ttl pb-45">
-          Proudly Serving <b>60,000+</b> Customers
+          Proudly Serving <b>{{common.customerCount}}+</b> Customers
         </div>
         <div class="mw_partners_inner mw_partners_slider-animate" id="partner-slider">
           <img v-for="(partner, i) in partners" :key="i" class="img-fluid no-hw-attribute" :src="partner.src" :alt="partner.alt" />
@@ -116,7 +116,9 @@
 
 <script setup>
 import Tooltip from '~/components/Tooltip.vue'
+import { useCommon } from '~/composables/useCommon';
 
+const common = useCommon();
 defineProps({
 // Heading: string for content, false to hide
   heading: { type: [String, Boolean], default: false },
@@ -128,7 +130,7 @@ defineProps({
   subheading: { type: [String, Boolean], default: false },
 
   features: { type: Array, default: () => [] },
-  currency: { type: String, default: "₹" },
+  currency: { type: String, default: "$" },
 
   // Strike price: string to show, false to hide
   strikePrice: { type: [String, Boolean], default: false },
