@@ -65,31 +65,31 @@
             </div>
 
             <!-- Guarantee -->
-            <div v-if="guarantee === '30'" class="d-flex mw-align-center">
-              <span class="mw-guarantee-icon">
-                <img
-                  class="img-fluid no-hw-attribute"
-                  width="18"
-                  height="20"
-                  src="/assets/images/banner-icons/check-money-back.svg"
-                  alt="30-day Money-Back Guarantee"
-                />
-              </span>
-              <div class="mw-ban-guarantee">30-day money-back guarantee</div>
+            <div v-if="guarantee && guarantee.text" class="d-flex mw-align-center">
+                <span class="mw-guarantee-icon">
+                    <img
+                    class="img-fluid no-hw-attribute"
+                    width="18"
+                    height="20"
+                    src="/assets/images/banner-icons/check-money-back.svg"
+                    :alt="`${guarantee.text}-day Money-Back Guarantee`"
+                    />
+                </span>
+
+                <div class="mw-ban-guarantee">
+                    {{ guarantee.text }}-day
+                    <component
+                    :is="Tooltip"
+                    :tip="guarantee.tip"
+                    :position="guarantee.position || 'bottom'"
+                    class="inline-block"
+                    >
+                    money-back
+                    </component>
+                    guarantee
+                </div>
             </div>
 
-            <div v-if="guarantee === '7'" class="d-flex mw-align-center">
-              <span class="mw-guarantee-icon">
-                <img
-                  class="img-fluid no-hw-attribute"
-                  width="18"
-                  height="20"
-                  src="/assets/images/banner-icons/check-money-back.svg"
-                  alt="7-day Money-Back Guarantee"
-                />
-              </span>
-              <div class="mw-ban-guarantee">7-day money-back guarantee</div>
-            </div>
           </div>
         </div>
 
@@ -141,7 +141,7 @@ defineProps({
 
   showTimer: { type: Boolean, default: false },
   showFreeTrial: { type: Boolean, default: false },
-  guarantee: { type: String, default: "30" },
+ guarantee: { type: Object, default: () => ({}) },
   bannerImage: { type: String, default: "/assets/images/mw/best-web-hosting.gif" },
   partners: {
     type: Array,

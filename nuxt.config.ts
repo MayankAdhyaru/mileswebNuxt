@@ -3,8 +3,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   css: [
-    '~/assets/css/main-common1.css',
-    '~/assets/css/main-common2.css',
+    '~/assets/css/main.css',
     '~/assets/fonts/dm-sans.css'
   ],
     app: {

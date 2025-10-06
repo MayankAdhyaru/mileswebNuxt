@@ -43,7 +43,7 @@ const hero = {
     "Free mailboxes and AI website builder",
     {
       text: '24/7 customer support',
-      position: 'bottom',
+      position: 'right',
       tip: `<img class="img-fluid pb-10" src="/assets/images/mw/tooltip/support.avif" alt="24/7 expert support | MilesWeb India" title="24/7 expert support | MilesWeb India" loading="lazy" width="355" height="159">Get real help, anytime! Our 24/7 expert support is available via live chat, email, and tickets—no chatbots, just real people.`
     }
   ],
@@ -54,9 +54,20 @@ const hero = {
   freeMonthsText: "+3 months free",
   showTimer: false,
   showFreeTrial: false,
-  guarantee: "30",
+guarantee: {
+  text: 30,
+  position: "bottom",
+  tip: `<img loading="lazy" class="img-fluid pb-10"
+             src="/assets/images/mw/tooltip/30-days.avif"
+             alt="Money-Back Guarantee | MilesWeb"
+             title="Money-Back Guarantee | MilesWeb"
+             width="355" height="159">
+        Customer satisfaction is our top priority here at MilesWeb!
+        You can try our services with complete peace of mind!
+        However, if something goes wrong, you can request a <b>refund within 30 days</b> of signup.`
 }
 
+}
 </script>
 
 <template>
