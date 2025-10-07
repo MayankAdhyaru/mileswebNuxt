@@ -31,27 +31,42 @@ export default defineEventHandler(() => {
       web_2: ['', '149.00', '219.00', '599.00'],
       web_3: ['', '249.00', '349.00', '799.00'],
     },
+    ratingSection : {
+    showCode: true,
+    trustpilot: { rating: 4.8, count: 1250, url: "https://www.trustpilot.com/review/milesweb.com" },
+    hostadvice: { rating: 4.5, count: 320, logo: "/assets/images/hosting/hostadvice.svg" },
+    google: { rating: 4.6, count: 410, logo: "/assets/images/hosting/google.svg" },
+    wordpressHighlight: { title: "Users' First Choice!", icon: "/assets/images/home/wordpress-websites.svg", show: true }
+  }
   }
 
-  // Helper functions similar to plugin
-//   function getDiscount(category: string, index: number | null = null) {
-//     const arr = (common.discounts as Record<string, string[]>)[category] || []
-//     const cleaned = arr.filter((d: string) => d && d !== '')
-//     if (index !== null) return cleaned[index] || ''
-//     const numbers = cleaned.map((d: string) => parseInt(d)).filter((n: number) => !isNaN(n))
-//     return numbers.length ? Math.max(...numbers) + '%' : ''
-//   }
+  // Helper functions
+  function getDiscount(category: string, index: number | null = null) {
+    const arr = (common.discounts as Record<string, string[]>)[category] || []
+    const cleaned = arr.filter(d => d && d !== '')
+    if (index !== null) return cleaned[index] || ''
+    const numbers = cleaned.map(d => parseInt(d)).filter(n => !isNaN(n))
+    return numbers.length ? Math.max(...numbers) + '%' : ''
+  }
 
-  function getSave(planKey: string, index = 0) {
-    const discountArr = common.discounts.web_hosting || []
-    return discountArr[index] ? `Save ${discountArr[index]}` : ''
+  function getSave(category: string, index = 0) {
+    const arr = (common.discounts as Record<string, string[]>)[category] || []
+    return arr[index] ? `Save ${arr[index]}` : ''
   }
 
   const save = {
-    web_1: ['', getSave('web_1', 0)],
-    web_2: ['', getSave('web_2', 1)],
-    web_3: ['', getSave('web_3', 2)],
+    web_1: ['', getSave('web_hosting', 0)],
+    web_2: ['', getSave('web_hosting', 1)],
+    web_3: ['', getSave('web_hosting', 2)],
   }
 
-  return { common: { ...common, save } }
+  // ✅ Return everything + the functions themselves
+  return {
+    common: {
+      ...common,
+      save,
+      getDiscount,
+      getSave
+    }
+  }
 })

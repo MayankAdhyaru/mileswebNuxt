@@ -1,41 +1,32 @@
 <script setup>
 import Hero from '~/components/Hero.vue'
-const { data: apiData, pending: heroPending, error: heroError } = await useAsyncData('hero', () => $fetch('/api/indexPage'))
-const { data: commonData, pending: commonPending, error: commonError } = await useAsyncData('common', () => $fetch('/api/common'))
+const { data: apiData } = await useAsyncData('hero', () => $fetch('/api/indexPage'))
+const { data: commonData} = await useAsyncData('common', () => $fetch('/api/common'))
 
 // Extract usable plain objects from the refs safely
 const heroPayload = apiData?.value?.hero || null
+const headPayload = apiData.value?.head || {}
 // common API may return either { common: {...} } or the object itself; accept both shapes
 const commonPayload = commonData?.value?.common ?? commonData?.value ?? {}
 // SEO for this page
 useHead({
-  title: "India's Best Web Hosting Company | 76% OFF Web Hosting Services",
+  title: headPayload.title,
   meta: [
     { charset: "utf-8" },
-    {
-      name: "description",
-      content: "Host smarter with India's best web hosting services. SSD NVMe storage, FREE AI website builder, Domain, SSL, migration & 24/7 support—all at affordable prices."
-    },
+    { name: "description", content: headPayload.description },
     { name: "alexaVerifyID", content: "bwEf6ZuaKbJBtiD3eIlduiGJKLY" },
-
-    { property: "og:title", content: "India's Best Web Hosting Company | 76% OFF Web Hosting Services" },
+    { property: "og:title", content:  headPayload.ogTitle },
     { property: "og:site_name", content: "MilesWeb" },
     { property: "og:url", content: "https://www.milesweb.in" },
-    { property: "og:description", content: "Host smarter with India's best web hosting services. SSD NVMe storage, FREE AI website builder, Domain, SSL, migration & 24/7 support—all at affordable prices." },
+    { property: "og:description",  content: headPayload.ogDescription },
     { property: "og:type", content: "website" },
     { property: "og:image", content: "https://www.milesweb.in/assets/images/logo/milesweb-200x200.png" },
-
     { name: "viewport", content: "width=device-width, initial-scale=1.0" }
   ],
   link: [
-    { rel: "canonical", href: "https://www.milesweb.in" },
-    { rel: "alternate", href: "https://hi.milesweb.in", hreflang: "hi-IN" },
-    { rel: "alternate", href: "https://www.milesweb.com", hreflang: "en-US" },
-    { rel: "alternate", href: "https://www.milesweb.in", hreflang: "en-IN" },
-    { rel: "alternate", href: "https://www.milesweb.co.uk", hreflang: "en-GB" },
-    { rel: "alternate", href: "https://www.milesweb.ae/", hreflang: "en-AE" },
     { rel: "alternate", href: "https://www.milesweb.com", hreflang: "x-default" },
-    { rel: "shortcut icon", href: "https://www.milesweb.in/img-assets/favicon.ico" }
+    { rel: "shortcut icon", href: "https://www.milesweb.in/img-assets/favicon.ico" },
+    ...(headPayload.link || [])
   ]
 })
 
@@ -62,5 +53,6 @@ const hero = {
 <template>
   <div>
     <Hero v-bind="hero" />
+    <Ratings />
   </div>
 </template>
