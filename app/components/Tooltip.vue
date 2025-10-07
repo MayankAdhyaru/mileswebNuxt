@@ -1,9 +1,15 @@
 <template>
-  <span 
+  <!-- Make trigger focusable and keyboard accessible -->
+  <span
     class="mw-hov-tooltip-btn relative inline-block"
     @mouseenter="showTooltip"
     @mouseleave="hideTooltip"
+    @focus="showTooltip"
+    @blur="hideTooltip"
     ref="trigger"
+    tabindex="0"
+    role="button"
+    aria-expanded="false"
   >
     <slot></slot>
 
@@ -36,7 +42,16 @@ const actualPosition = ref(props.position) // dynamic — will change if needed
 
 function showTooltip() {
   visible.value = true
-  nextTick(() => positionTooltip())
+  nextTick(() => {
+    try {
+      positionTooltip()
+    } catch (e) {
+      // Defensive: log and avoid throwing to calling code
+      // (sometimes during unmount the nodes are missing)
+      // eslint-disable-next-line no-console
+      console.warn('Tooltip position failed', e)
+    }
+  })
 }
 
 function hideTooltip() {
@@ -46,7 +61,9 @@ function hideTooltip() {
 function positionTooltip() {
   const t = trigger.value
   const tt = tooltip.value
+  // Defensive guards: if refs are not present or tooltip detached, bail out
   if (!t || !tt) return
+  if (tt.parentNode == null) return
 
   const tRect = t.getBoundingClientRect()
   const ttRect = tt.getBoundingClientRect()

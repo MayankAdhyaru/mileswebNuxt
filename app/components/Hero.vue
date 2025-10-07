@@ -104,7 +104,7 @@
       <!-- Partners -->
       <div class="mw_partners">
         <div class="mw_partners_ttl pb-45">
-          Proudly Serving <b>{{common.customerCount}}+</b> Customers
+          Proudly Serving <b>{{ commonPayload.customerCount }}+</b> Customers
         </div>
         <div class="mw_partners_inner mw_partners_slider-animate" id="partner-slider">
           <img v-for="(partner, i) in partners" :key="i" class="img-fluid no-hw-attribute" :src="partner.src" :alt="partner.alt" />
@@ -117,8 +117,17 @@
 <script setup>
 import Tooltip from '~/components/Tooltip.vue'
 import { useCommon } from '~/composables/useCommon';
+import { computed } from 'vue'
+
+// fetch common API (may return either { common: {...} } or the raw object)
+const { data: commonData, pending: commonPending, error: commonError } = await useAsyncData('common', () => $fetch('/api/common'))
 
 const common = useCommon();
+
+// unified payload: prefer API value (either wrapper or raw), otherwise fall back to injected common
+const commonPayload = computed(() => {
+  return (commonData?.value?.common ?? commonData?.value) || common || {}
+})
 defineProps({
 // Heading: string for content, false to hide
   heading: { type: [String, Boolean], default: false },

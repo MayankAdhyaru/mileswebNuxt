@@ -1,8 +1,12 @@
 <script setup>
 import Hero from '~/components/Hero.vue'
-import { useCommon } from '~/composables/useCommon';
+const { data: apiData, pending: heroPending, error: heroError } = await useAsyncData('hero', () => $fetch('/api/indexPage'))
+const { data: commonData, pending: commonPending, error: commonError } = await useAsyncData('common', () => $fetch('/api/common'))
 
-const common = useCommon();
+// Extract usable plain objects from the refs safely
+const heroPayload = apiData?.value?.hero || null
+// common API may return either { common: {...} } or the object itself; accept both shapes
+const commonPayload = commonData?.value?.common ?? commonData?.value ?? {}
 // SEO for this page
 useHead({
   title: "India's Best Web Hosting Company | 76% OFF Web Hosting Services",
@@ -35,50 +39,28 @@ useHead({
   ]
 })
 
-// ✅ Inline data (instead of external file)
-const hero = {
-  heading: `<h1>Web Hosting India</h1> - Up to  ${common.getDiscount('web_hosting_discount')} off`,
-  headingH1: `<h1>Web Hosting India</h1> - Up to  ${common.getDiscount('web_hosting_discount')} off`,
-  subheading: "<h2>Get fast and reliable hosting </h2> + Free domain",
-  features: [
-    "Free SSL and website migration",
-    "Free mailboxes and AI website builder",
-    {
-      text: '24/7 customer support',
-      position: 'right',
-      tip: `<img class="img-fluid pb-10" src="/assets/images/mw/tooltip/support.avif" alt="24/7 expert support | MilesWeb India" title="24/7 expert support | MilesWeb India" loading="lazy" width="355" height="159">Get real help, anytime! Our 24/7 expert support is available via live chat, email, and tickets—no chatbots, just real people.`
-    }
-  ],
-  currency: common.currencySymbol,
-  strikePrice: false,
-  price: common.price.web_2[1],
-  billingCycle: "/mo",
-  freeMonthsText: "+3 months free",
-  showTimer: false,
-  showFreeTrial: false,
-  plansBtn: "Start now",
-  showPrice: true,
-guarantee: {
-  text: 30,
-  position: "bottom",
-  tip: `<img loading="lazy" class="img-fluid pb-10"
-             src="/assets/images/mw/tooltip/30-days.avif"
-             alt="Money-Back Guarantee | MilesWeb"
-             title="Money-Back Guarantee | MilesWeb"
-             width="355" height="159">
-        Customer satisfaction is our top priority here at MilesWeb!
-        You can try our services with complete peace of mind!
-        However, if something goes wrong, you can request a <b>refund within 30 days</b> of signup.`
-}
 
+
+const hero = {
+  heading: heroPayload?.heading || `<h1>Web Hosting India</h1>`,
+  headingH1: heroPayload?.headingH1 || `<h1>Web Hosting India</h1>`,
+  subheading: heroPayload?.subheading || `<h2>Get fast and reliable hosting </h2> + Free domain`,
+  features: heroPayload?.features || ["Free SSL and website migration", "Free mailboxes and AI website builder"],
+  // Use hero payload if it defines currency; prefer common price as authoritative
+  currency: commonPayload.currencySymbol || '₹',
+  // prefer common price first, then hero payload, then default
+  price: commonPayload.price?.web_2?.[1] || heroPayload?.price || '49',
+  billingCycle: heroPayload?.billingCycle || "/mo",
+  freeMonthsText: heroPayload?.freeMonthsText || "+3 months free",
+  showPrice: typeof heroPayload?.showPrice !== 'undefined' ? heroPayload.showPrice : true,
+  plansBtn: heroPayload?.plansBtn || 'Start now',
+  // include guarantee etc. if present
+  guarantee: heroPayload?.guarantee || {}
 }
 </script>
 
 <template>
   <div>
-    <!-- Pass props to Hero.vue -->
     <Hero v-bind="hero" />
-
-
   </div>
 </template>

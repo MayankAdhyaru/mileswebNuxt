@@ -1,7 +1,5 @@
-import { reactive } from 'vue';
-
-export default defineNuxtPlugin((nuxtApp) => {
-  const common = reactive({
+export default defineEventHandler(() => {
+  const common = {
     customerCount: "60,000",
     currencySymbol: "₹",
     discounts: {
@@ -33,29 +31,27 @@ export default defineNuxtPlugin((nuxtApp) => {
       web_2: ['', '149.00', '219.00', '599.00'],
       web_3: ['', '249.00', '349.00', '799.00'],
     },
+  }
 
-    // Function to get discount: highest or by index
-    getDiscount(category, index = null) {
-      const arr = this.discounts[category] || [];
-      const cleaned = arr.filter(d => d && d !== '');
-      if (index !== null) return cleaned[index] || '';
-      const numbers = cleaned.map(d => parseInt(d)).filter(n => !isNaN(n));
-      return numbers.length ? Math.max(...numbers) + '%' : '';
-    },
+  // Helper functions similar to plugin
+//   function getDiscount(category: string, index: number | null = null) {
+//     const arr = (common.discounts as Record<string, string[]>)[category] || []
+//     const cleaned = arr.filter((d: string) => d && d !== '')
+//     if (index !== null) return cleaned[index] || ''
+//     const numbers = cleaned.map((d: string) => parseInt(d)).filter((n: number) => !isNaN(n))
+//     return numbers.length ? Math.max(...numbers) + '%' : ''
+//   }
 
-    // Function to get save text for a plan dynamically
-    getSave(planKey, index = 0) {
-      const discountArr = this.discounts.web_hosting || [];
-      return discountArr[index] ? `Save ${discountArr[index]}` : '';
-    }
-  });
+  function getSave(planKey: string, index = 0) {
+    const discountArr = common.discounts.web_hosting || []
+    return discountArr[index] ? `Save ${discountArr[index]}` : ''
+  }
 
-  // Optional: If you want to initialize 'save' object like before
-  common.save = {
-    web_1: ['', common.getSave('web_1', 0)],
-    web_2: ['', common.getSave('web_2', 1)],
-    web_3: ['', common.getSave('web_3', 2)],
-  };
+  const save = {
+    web_1: ['', getSave('web_1', 0)],
+    web_2: ['', getSave('web_2', 1)],
+    web_3: ['', getSave('web_3', 2)],
+  }
 
-  nuxtApp.provide('common', common);
-});
+  return { common: { ...common, save } }
+})
