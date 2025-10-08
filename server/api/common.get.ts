@@ -33,9 +33,9 @@ export default defineEventHandler(() => {
     },
     ratingSection : {
     showCode: true,
-    trustpilot: { rating: 4.8, count: 1250, url: "https://www.trustpilot.com/review/milesweb.com" },
-    hostadvice: { rating: 4.5, count: 320, logo: "/assets/images/hosting/hostadvice.svg" },
-    google: { rating: 4.6, count: 410, logo: "/assets/images/hosting/google.svg" },
+    trustpilot: { rating: 4.9, count: "13,017", url: "https://www.trustpilot.com/review/milesweb.com", logo: "/assets/images/hosting/trustpilot.svg", newlogo: "/assets/images/mw/trustpilot.svg"},
+    hostadvice: { rating: 4.6, count: "1,603", logo: "/assets/images/hosting/hostadvice.svg", newlogo: "/assets/images/mw/hostadvice.svg" },
+    google: { rating: 4.5, count: "5,637", logo: "/assets/images/hosting/google.svg", newlogo: "/assets/images/mw/google.svg" },
     wordpressHighlight: { title: "Users' First Choice!", icon: "/assets/images/home/wordpress-websites.svg", show: true }
   }
   }

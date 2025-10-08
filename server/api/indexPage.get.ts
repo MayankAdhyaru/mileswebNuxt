@@ -49,5 +49,29 @@ export default defineEventHandler(async () => {
         }
     };
 
-    return { hero, head };
+    // Support Section data
+    const support = {
+        title: 'Get dependable business hosting with 24/7 support.',
+        description:'From 24/7 bilingual support to lightning-fast servers everything’s handled for you, stress-free.',
+        image:"/assets/images/mw/support.gif",
+        alt: "Real human support | MilesWeb India",
+        feature:{
+            title:"Real human support",
+            description:"No chat-bots, get expert solutions from our professionals with high-end security.",
+            image:"/assets/images/mw/support.png",
+            alt: "Real human support | MilesWeb India"
+        },
+        feature2:{
+            title:"Fully managed WordPress",
+            description:"We handle all the technical details so you can focus on your content.",
+            image:"/assets/images/mw/toolkit.png",
+            alt: "Fully managed WordPress | MilesWeb India"
+        },
+        btn:{
+            text:"Connect with experts",
+            link:"javascript:void(Tawk_API.toggle())"
+        }
+    }
+
+    return { hero, head, support };
 });
