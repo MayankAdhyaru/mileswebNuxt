@@ -7,7 +7,7 @@
           <div class="mw-ban-content">
             <!-- Heading -->
             <div v-if="headingH1" class="mw-ban-ttl-h1 fff" v-html="headingH1"></div>
-            <h1 v-else class="mw-ban-ttl fff" v-html="heading"></h1>
+            <h1 v-else class="mw-ban-ttl fff">{{ heading }}</h1>
 
             <!-- Subheading -->
             <div class="mw-h1 fff" v-html="subheading"></div>
@@ -17,17 +17,18 @@
               <ul class="re-ban-list_1 mw-row p-0">
                 <li v-for="(feature, i) in features" :key="i" class="mw-row-align">
                     <!-- If feature is an object with a `tip`, render Tooltip component -->
-                    <Tooltip
+                    <component
                       v-if="feature && typeof feature === 'object' && feature.tip"
+                      :is="Tooltip"
                       :tip="feature.tip"
                       :position="feature.position || 'bottom'"
-                      v-html="feature.text"
                     >
-                    </Tooltip>
+                      {{ feature.text}}
+                    </component>
 
                     <!-- Otherwise render plain text -->
                     <template v-else>
-                      <span v-html="feature"></span>
+                      <span>{{ feature }}</span>
                     </template>
                 </li>
               </ul>
@@ -36,22 +37,24 @@
             <!-- Price Section -->
             <div v-if="showPrice" class="d-flex pt-22 pb-30 mw-align-center mw-ban-price-row">
               <div v-if="strikePrice" class="mw-ban-str-price">
-                <span v-html="currency"></span><span v-html="strikePrice"></span>/mo
+                <span>{{ currency }}</span>{{ strikePrice }}/mo
               </div>
               <div class="mw-ban-price fff">
-                <span v-html="currency"></span>
-                <b v-html="price"></b>
-                <div class="mw-ban-price1" v-html="billingCycle"></div>
+                <span>{{ currency }}</span>
+                <b>{{ price }}</b>
+                <div class="mw-ban-price1">{{ billingCycle }}</div>
               </div>
             </div>
 
             <!-- Free Months -->
-            <div class="re_month_free pb-30 fff" v-if="freeMonthsText" v-html="freeMonthsText"></div>
+            <div class="re_month_free pb-30 fff" v-if="freeMonthsText">
+              {{ freeMonthsText }}
+            </div>
 
             <!-- Buttons -->
             <div class="d-flex flex-wrap" :class="{ 'pt-45': !showPrice }">
               <span class="mw-btn jump-to-plans mw-ban-mr mw-ban-btn mw-btn-h">
-                <span v-html="plansBtn"></span>
+                <span>{{ plansBtn }}</span>
               </span>
 
               <div v-if="showTimer" class="mw-ban-btn mw-ban-mr" id="mw-offer-timer">00 : 29 : 59</div>
@@ -74,17 +77,19 @@
                 </span>
 
                 <div class="mw-ban-guarantee">
-                    <span v-html="guarantee.text"></span>-day
-                    <Tooltip
-                      :tip="guarantee.tip"
-                      :position="guarantee.position || 'bottom'"
-                      class="inline-block"
+                    {{ guarantee.text }}-day
+                    <component
+                    :is="Tooltip"
+                    :tip="guarantee.tip"
+                    :position="guarantee.position || 'bottom'"
+                    class="inline-block"
                     >
-                      money-back
-                    </Tooltip>
+                    money-back
+                    </component>
                     guarantee
                 </div>
             </div>
+
           </div>
         </div>
 
@@ -99,7 +104,7 @@
       <!-- Partners -->
       <div class="mw_partners">
         <div class="mw_partners_ttl pb-45">
-          Proudly Serving <b v-html="commonPayload.customerCount"></b>+ Customers
+          Proudly Serving <b>{{ commonPayload.customerCount }}+</b> Customers
         </div>
         <div class="mw_partners_inner mw_partners_slider-animate" id="partner-slider">
           <img v-for="(partner, i) in partners" :key="i" class="img-fluid no-hw-attribute" :src="partner.src" :alt="partner.alt" />
