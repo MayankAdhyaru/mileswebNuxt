@@ -12,6 +12,7 @@ interface CaseStudy {
   imageDesktop: string
   imageMobile: string
   logo: string
+  alt: string
   description: string
   stats: { value: string | number, label: string }[]
   link: string
@@ -21,6 +22,7 @@ const caseStudies = ref<CaseStudy[]>([
   {
     id: 1,
     name: 'Amnas Ahamed',
+    alt: 'Amnas Ahamed | MilesWeb India',
     company: 'Claps Learn EdTech LLP',
     imageDesktop: '/assets/images/mw/case-study/amnas.avif',
     imageMobile: '/assets/images/mw/case-study-mob/amnas-ahamed.avif',
@@ -35,6 +37,7 @@ const caseStudies = ref<CaseStudy[]>([
   {
     id: 2,
     name: 'Jaydev Solanki',
+    alt: 'Jaydev Solanki | MilesWeb India',
     company: 'Search Minds Pvt. Ltd.',
     imageDesktop: '/assets/images/mw/case-study/jaydev-solanki.avif',
     imageMobile: '/assets/images/mw/case-study-mob/jaydev-solanki.avif',
@@ -49,6 +52,7 @@ const caseStudies = ref<CaseStudy[]>([
   {
     id: 3,
     name: 'Gaurav Patil',
+    alt: 'Gaurav Patil | MilesWeb India',
     company: 'Standard Wings Technologies',
     imageDesktop: '/assets/images/mw/case-study/gaurav-patil.avif',
     imageMobile: '/assets/images/mw/case-study-mob/gaurav-patil.avif',
@@ -63,6 +67,7 @@ const caseStudies = ref<CaseStudy[]>([
   {
     id: 4,
     name: 'Rumy Sharma',
+    alt: 'Rumy Sharma | MilesWeb India',
     company: 'TRF Studio',
     imageDesktop: '/assets/images/mw/case-study/rumy-sharma.avif',
     imageMobile: '/assets/images/mw/case-study-mob/rumy-sharma.avif',
@@ -77,6 +82,7 @@ const caseStudies = ref<CaseStudy[]>([
   {
     id: 5,
     name: 'Aatish Nair',
+    alt: 'Aatish Nair | MilesWeb India',
     company: 'Aatish G Nair Ventures',
     imageDesktop: '/assets/images/mw/case-study/aatish-nair.avif',
     imageMobile: '/assets/images/mw/case-study-mob/aatish-nair.avif',
@@ -91,6 +97,7 @@ const caseStudies = ref<CaseStudy[]>([
   {
     id: 6,
     name: 'Santanu Ganguly',
+    alt: 'Santanu Ganguly | MilesWeb India',
     company: 'Coders Mind',
     imageDesktop: '/assets/images/mw/case-study/santanu-ganguly.avif',
     imageMobile: '/assets/images/mw/case-study-mob/santanu-ganguly.avif',
@@ -105,6 +112,7 @@ const caseStudies = ref<CaseStudy[]>([
   {
     id: 7,
     name: 'Akash Chitragar',
+    alt: 'Akash Chitragar | MilesWeb India',
     company: 'WebArt4U',
     imageDesktop: '/assets/images/mw/case-study/akash-chitragar.avif',
     imageMobile: '/assets/images/mw/case-study-mob/akshay-chitragar.avif',
@@ -124,7 +132,7 @@ const swiperModules = [Navigation, Autoplay]
 
 <template>
 <section>
-  <div class="mw_results pt-60 pb-120">
+  <div class="mw_results pt-60 pb-60">
     <div class="mw-container pt-10">
       <div class="mw-row mw-align-center pb-60 mw_results_ttl_row">
         <div class="mw_results_ttl_col title-center">
@@ -169,11 +177,11 @@ const swiperModules = [Navigation, Autoplay]
                     <div class="mw-row">
                         <div class="mw-col-md-5 pb-md-24">
                             <div class="position-relative mw_results_user_img">
-                                <img :src="study.imageDesktop" class="img-fluid mw_results_user_img_desktop" alt="" />
-                                <img :src="study.imageMobile" class="img-fluid mw_results_user_img_mob" alt="" />
+                                <img :src="study.imageDesktop" class="img-fluid mw_results_user_img_desktop" :alt="study.alt"  :title="study.alt"/>
+                                <img :src="study.imageMobile" class="img-fluid mw_results_user_img_mob" :alt="study.alt"  :title="study.alt"/>
                                 <div class="mw_results_user">
-                                    <div class="mw-h4 fff pb-6">{{ study.name }}</div>
-                                    <p class="mw-h3-p fff">{{ study.company }}</p>
+                                    <div class="mw-h4 fff pb-6" v-html="study.name"></div>
+                                    <p class="mw-h3-p fff" v-html="study.company"></p>
                                 </div>
                             </div>
                         </div>
@@ -183,7 +191,7 @@ const swiperModules = [Navigation, Autoplay]
                                     <div class="pb-22">
                                         <img :src="study.logo" class="img-fluid" alt="" />
                                     </div>
-                                    <p class="mw_results_user_p">{{ study.description }}</p>
+                                    <p class="mw_results_user_p" v-html="study.description"></p>
                                     <div class="d-flex pt-30 pb-22">
                                         <div
                                             v-for="(stat, index) in study.stats"
@@ -191,8 +199,8 @@ const swiperModules = [Navigation, Autoplay]
                                             class="mw_results_10x_col"
                                             :class="{ 'mw_results_10x_col2': index === 1 }"
                                             >
-                                            <div class="mw_results_10x">{{ stat.value }}</div>
-                                            <p class="mw_results_10x_p">{{ stat.label }}</p>
+                                            <div class="mw_results_10x" v-html="stat.value"></div>
+                                            <p class="mw_results_10x_p" v-html="stat.label"></p>
                                         </div>
                                     </div>
                                 </div>

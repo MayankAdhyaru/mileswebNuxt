@@ -7,7 +7,7 @@
           <div class="mw-ban-content">
             <!-- Heading -->
             <div v-if="headingH1" class="mw-ban-ttl-h1 fff" v-html="headingH1"></div>
-            <h1 v-else class="mw-ban-ttl fff">{{ heading }}</h1>
+            <h1 v-else class="mw-ban-ttl fff" v-html="heading"></h1>
 
             <!-- Subheading -->
             <div class="mw-h1 fff" v-html="subheading"></div>
@@ -22,13 +22,13 @@
                       :is="Tooltip"
                       :tip="feature.tip"
                       :position="feature.position || 'bottom'"
+                      v-html="feature.text"
                     >
-                      {{ feature.text}}
                     </component>
 
                     <!-- Otherwise render plain text -->
                     <template v-else>
-                      <span>{{ feature }}</span>
+                      <span v-html="feature"></span>
                     </template>
                 </li>
               </ul>
@@ -37,24 +37,22 @@
             <!-- Price Section -->
             <div v-if="showPrice" class="d-flex pt-22 pb-30 mw-align-center mw-ban-price-row">
               <div v-if="strikePrice" class="mw-ban-str-price">
-                <span>{{ currency }}</span>{{ strikePrice }}/mo
+                <span v-html="currency"></span><span v-html="strikePrice"></span>/mo
               </div>
               <div class="mw-ban-price fff">
-                <span>{{ currency }}</span>
-                <b>{{ price }}</b>
-                <div class="mw-ban-price1">{{ billingCycle }}</div>
+                <span v-html="currency"></span>
+                <b v-html="price"></b>
+                <div class="mw-ban-price1" v-html="billingCycle"></div>
               </div>
             </div>
 
             <!-- Free Months -->
-            <div class="re_month_free pb-30 fff" v-if="freeMonthsText">
-              {{ freeMonthsText }}
-            </div>
+            <div class="re_month_free pb-30 fff" v-if="freeMonthsText" v-html="freeMonthsText"></div>
 
             <!-- Buttons -->
             <div class="d-flex flex-wrap" :class="{ 'pt-45': !showPrice }">
               <span class="mw-btn jump-to-plans mw-ban-mr mw-ban-btn mw-btn-h">
-                <span>{{ plansBtn }}</span>
+                <span v-html="plansBtn"></span>
               </span>
 
               <div v-if="showTimer" class="mw-ban-btn mw-ban-mr" id="mw-offer-timer">00 : 29 : 59</div>
@@ -77,7 +75,7 @@
                 </span>
 
                 <div class="mw-ban-guarantee">
-                    {{ guarantee.text }}-day
+                    <span v-html="guarantee.text"></span>-day
                     <component
                     :is="Tooltip"
                     :tip="guarantee.tip"
@@ -96,7 +94,7 @@
         <!-- RIGHT IMAGE -->
         <div class="mw-ban-col-5 p-0 d-flex mw-d-none">
           <div class="mw-ban-img">
-            <img class="img-fluid mw-ban-img-mobile" :src="bannerImage" alt="Hero Image" />
+            <img class="img-fluid mw-ban-img-mobile" :src="bannerImage" :alt="bannerAlt" :title="bannerAlt" />
           </div>
         </div>
       </div>
@@ -104,7 +102,7 @@
       <!-- Partners -->
       <div class="mw_partners">
         <div class="mw_partners_ttl pb-45">
-          Proudly Serving <b>{{ commonPayload.customerCount }}+</b> Customers
+          Proudly Serving <b v-html="commonPayload.customerCount"></b>+ Customers
         </div>
         <div class="mw_partners_inner mw_partners_slider-animate" id="partner-slider">
           <img v-for="(partner, i) in partners" :key="i" class="img-fluid no-hw-attribute" :src="partner.src" :alt="partner.alt" />
@@ -154,6 +152,7 @@ defineProps({
   showFreeTrial: { type: Boolean, default: false },
  guarantee: { type: Object, default: () => ({}) },
   bannerImage: { type: String, default: "/assets/images/mw/best-web-hosting.gif" },
+  bannerAlt: { type: String, default: "Best Web Hosting | MilesWeb India" },
   partners: {
     type: Array,
     default: () => [

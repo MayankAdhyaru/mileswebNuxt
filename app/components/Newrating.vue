@@ -13,6 +13,7 @@ interface RatingItem {
   url?: string
   logo?: string
   newlogo: string
+  alt: string
 }
 
 interface RatingSection {
@@ -25,9 +26,9 @@ interface RatingSection {
 const commonPayload = ref<{ ratingSection: RatingSection }>({
   ratingSection: {
     showCode: false,
-    trustpilot: { rating: 0, count: 0, url: '', logo: '', newlogo: '' },
-    hostadvice: { rating: 0, count: 0, logo: '', newlogo: '' },
-    google: { rating: 0, count: 0, logo: '', newlogo: '' }
+    trustpilot: { rating: 0, count: 0, url: '', logo: '', newlogo: '', alt: '' },
+    hostadvice: { rating: 0, count: 0, logo: '', newlogo: '', alt: ''  },
+    google: { rating: 0, count: 0, logo: '', newlogo: '', alt: ''  }
   }
 })
 
@@ -88,13 +89,15 @@ const ratingItems: RatingKey[] = ['trustpilot', 'hostadvice', 'google']
                           <img
                             class="img-fluid"
                             :src="commonPayload.ratingSection[key].newlogo"
-                            :alt="key"
+                            :alt="commonPayload.ratingSection[key].alt"
+                            :title="commonPayload.ratingSection[key].alt"
                           />
                         </div>
                         <div class="ho-rating-point">
-                          <b>{{ commonPayload.ratingSection[key].rating }}/5</b>
+                          <b v-html="commonPayload.ratingSection[key].rating"></b>
+                          <b>/5</b>
                           <span>&nbsp;|&nbsp;</span>
-                          <b>{{ commonPayload.ratingSection[key].count }}</b> Reviews
+                          <b v-html="commonPayload.ratingSection[key].count"></b> Reviews
                         </div>
                     </div>
                   </div>
@@ -114,15 +117,16 @@ const ratingItems: RatingKey[] = ['trustpilot', 'hostadvice', 'google']
                         <img
                             class="img-fluid"
                             :src="commonPayload.ratingSection[key].newlogo"
-                            :alt="key"
+                            :alt="commonPayload.ratingSection[key].alt"
+                            :title="commonPayload.ratingSection[key].alt"
                         />
                     </div>
                     <div class="ho-rating-point">
-                        <b>{{ commonPayload.ratingSection[key].rating }}/5</b>
+                        <b v-html="commonPayload.ratingSection[key].rating"></b>
+                        <b>/5</b>
                         <span>&nbsp;|&nbsp;</span>
-                        <b>{{ commonPayload.ratingSection[key].count }}</b> Reviews
+                        <b v-html="commonPayload.ratingSection[key].count"></b> Reviews
                     </div>
-
                 </div>
             </div>
         </div>

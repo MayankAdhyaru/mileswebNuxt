@@ -42,7 +42,7 @@ onMounted(async () => {
           />
         </span>
         <span class="ho-rating-wp-txt">
-          <b>{{ commonPayload.ratingSection.wordpressHighlight.title }}</b>
+          <b v-html="commonPayload.ratingSection.wordpressHighlight.title"></b>
         </span>
       </div>
 
@@ -71,9 +71,9 @@ onMounted(async () => {
                     />
                   </div>
                   <div class="ho-rating-point">
-                    TrustScore <b>{{ commonPayload.ratingSection.trustpilot.rating }}</b>
+                    TrustScore <b v-html="commonPayload.ratingSection.trustpilot.rating"></b>
                     <span>|</span>
-                    <b>{{ commonPayload.ratingSection.trustpilot.count }}</b> Reviews
+                    <b v-html="commonPayload.ratingSection.trustpilot.count"></b> Reviews
                   </div>
                 </a>
               </div>
@@ -95,8 +95,8 @@ onMounted(async () => {
                 />
               </div>
               <div class="ho-rating-point">
-                Rating: <b>{{ commonPayload.ratingSection.hostadvice.rating }}</b> |
-                <b>{{ commonPayload.ratingSection.hostadvice.count }}</b> Reviews
+                Rating: <b v-html="commonPayload.ratingSection.hostadvice.rating"></b> |
+                <b v-html="commonPayload.ratingSection.hostadvice.count"></b> Reviews
               </div>
             </div>
           </div>
@@ -116,8 +116,8 @@ onMounted(async () => {
                 />
               </div>
               <div class="ho-rating-point">
-                Rating: <b>{{ commonPayload.ratingSection.google.rating }}</b> |
-                <b>{{ commonPayload.ratingSection.google.count }}</b> Reviews
+                Rating: <b v-html="commonPayload.ratingSection.google.rating"></b> |
+                <b v-html="commonPayload.ratingSection.google.count"></b> Reviews
               </div>
             </div>
           </div>

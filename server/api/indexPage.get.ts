@@ -24,6 +24,8 @@ export default defineEventHandler(async () => {
         heading: `<h1>Web Hosting India</h1> - Up to ${common.getDiscount?.('web_hosting') || '76'}% off`,
         headingH1: `<h1>Web Hosting India</h1> - Up to ${common.getDiscount?.('web_hosting') || '76'}% off`,
         subheading: `<h2>Get fast and reliable hosting </h2> + Free domain`,
+        bannerAlt:"India's Best Web Hosting Company | MilesWeb India",
+        bannerImage:"/assets/images/mw/best-web-hosting.gif",
         features: [
             "Free SSL and website migration",
             "Free mailboxes and AI website builder",
@@ -73,5 +75,40 @@ export default defineEventHandler(async () => {
         }
     }
 
-    return { hero, head, support };
+    const mpanel = {    
+        title: 'Refined mPanel for seamless hosting management',
+        description:'MilesWeb offers you an entire hosting toolkit in one intuitive dashboard.',
+        image:'/assets/images/mw/mpanel.png',
+        alt: 'Refined mPanel for seamless hosting management | MilesWeb India',
+        feature:{
+            title:"Unified dashboard",
+            description:"Manage all your domains and websites from a single, intuitive control panel.",
+            image:"/assets/images/mw/domain-control.svg",
+            alt: "Unified dashboard | MilesWeb India"
+        },
+        feature2:{
+            title:"Performance monitoring",
+            description:"Get real-time insights into your site's performance with a dedicated speed score.",
+            image:"/assets/images/mw/build.svg",
+            alt: "Performance monitoring | MilesWeb India"
+        },
+        feature3:{
+            title:"Comprehensive tools",
+            description:"Manage your files, databases, and WordPress installation all from one dashboard.",
+            image:"/assets/images/mw/tools.svg",
+            alt: "Comprehensive tools | MilesWeb India"
+        },
+        feature4:{
+            title:"Seamless email setup",
+            description:"Create and manage all your <a class='aclr2' href='/professional-email'>professional email</a> accounts with ease.",
+            image:"/assets/images/mw/email.svg",
+            alt: "Seamless email setup | MilesWeb India"
+        },
+        btn:{
+            text:"Get Started Now",
+        }
+
+    }
+
+    return { hero, head, support, mpanel};
 });
