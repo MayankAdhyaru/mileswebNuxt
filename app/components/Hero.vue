@@ -17,14 +17,13 @@
               <ul class="re-ban-list_1 mw-row p-0">
                 <li v-for="(feature, i) in features" :key="i" class="mw-row-align">
                     <!-- If feature is an object with a `tip`, render Tooltip component -->
-                    <component
+                    <Tooltip
                       v-if="feature && typeof feature === 'object' && feature.tip"
-                      :is="Tooltip"
                       :tip="feature.tip"
                       :position="feature.position || 'bottom'"
                       v-html="feature.text"
                     >
-                    </component>
+                    </Tooltip>
 
                     <!-- Otherwise render plain text -->
                     <template v-else>
@@ -76,18 +75,16 @@
 
                 <div class="mw-ban-guarantee">
                     <span v-html="guarantee.text"></span>-day
-                    <component
-                    :is="Tooltip"
-                    :tip="guarantee.tip"
-                    :position="guarantee.position || 'bottom'"
-                    class="inline-block"
+                    <Tooltip
+                      :tip="guarantee.tip"
+                      :position="guarantee.position || 'bottom'"
+                      class="inline-block"
                     >
-                    money-back
-                    </component>
+                      money-back
+                    </Tooltip>
                     guarantee
                 </div>
             </div>
-
           </div>
         </div>
 
