@@ -73,6 +73,8 @@
                     height="20"
                     src="/assets/images/banner-icons/check-money-back.svg"
                     :alt="`${guarantee.text}-day Money-Back Guarantee`"
+                    fetchpriority="high"
+                    decoding="async"
                     />
                 </span>
 
@@ -96,7 +98,7 @@
         <!-- RIGHT IMAGE -->
         <div class="mw-ban-col-5 p-0 d-flex mw-d-none">
           <div class="mw-ban-img">
-            <img class="img-fluid mw-ban-img-mobile" :src="bannerImage" :alt="bannerAlt" :title="bannerAlt" />
+            <img class="img-fluid mw-ban-img-mobile" :src="bannerImage" :alt="bannerAlt" :title="bannerAlt"  fetchpriority="high" decoding="async" />
           </div>
         </div>
       </div>
