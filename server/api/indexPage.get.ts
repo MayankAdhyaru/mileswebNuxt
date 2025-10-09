@@ -156,9 +156,76 @@ export default defineEventHandler(async () => {
                 }
             },
         ]
-
-
     }
 
-    return { hero, head, support, mpanel, migration, whyChoose};
+    const productAndServices = {
+        title: 'Our high-grade, performance-powered products and services',
+        description: '',
+        tabs:[
+            {
+                text:'Cloud Hosting',
+                image:'/assets/images/mw/cloud.svg',
+                alt:'Cloud Hosting | MilesWeb India',
+            },
+            {
+                text:'Business Email',
+                image:'/assets/images/mw/business-tab.svg',
+                alt:'Business Email | MilesWeb India',
+            },
+            {
+                text:'Website Builder',
+                image:'/assets/images/mw/builder-tab.svg',
+                alt:'Website Builder | MilesWeb India',
+            },
+            {
+                text:'Domain',
+                image:'/assets/images/mw/domain-tab.svg',
+                alt:'Domain | MilesWeb India',
+            }
+        ],
+        tabsContent:[
+            {
+                text:'Fully optimized cloud hosting',
+                description:'Our feature-rich cloud hosting plans optimally offer top-tier server specs and high uptime to ensure peak performance for your website around the clock.',
+                btn: {
+                    text: 'View plans',
+                    link: '/hosting/cloud-hosting/',
+                },
+                image:'/assets/images/mw/cloud-hosting.gif',
+                alt:'Fully optimized cloud hosting | MilesWeb India',
+            },
+            {
+                text:'Professional email that grows with your business.',
+                description:'Get custom business emails that match your brand and align with your domain.',
+                btn: {
+                    text: 'Get Started',
+                    link: '/business-email',
+                },
+                image:'/assets/images/mw/business-email.gif',
+                alt:'Professional email that grows with your business | MilesWeb India',
+            },
+            {
+                text:'Build a professional website in minutes.',
+                description:'Our AI website builder designs your site for a simplified online journey.',
+                btn: {
+                    text: 'Build with AI',
+                    link: '/ai-website-builder',
+                },
+                image:'/assets/images/mw/website-builder.gif',
+                alt:'Build a professional website in minutes | MilesWeb India',
+            },
+            {
+                text:'A dream domain for a strong web presence.',
+                description:'Our AI domain generator finds you the ideal domain name in seconds.',
+                btn: {
+                    text: 'Get Your Domain',
+                    link: '/domains/',
+                },
+                image:'/assets/images/mw/domain.gif',
+                alt:'A dream domain for a strong web presence | MilesWeb India',
+            }
+        ]
+    }
+
+    return { hero, head, support, mpanel, migration, whyChoose, productAndServices};
 });

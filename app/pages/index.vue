@@ -27,6 +27,7 @@ const supportPayload = apiData.value?.support || {}
 const mpanelPayload = apiData.value?.mpanel || {}
 const migrationPayload = apiData.value?.migration || {}
 const whyChoosePayload = apiData.value?.whyChoose || {}
+const prodServPaylod = apiData.value?.productAndServices || {}
 // SEO for this page
 useHead({
   title: headPayload.title,
@@ -117,6 +118,75 @@ const migration = {
             },
         ]
     }
+    const productAndServices = {
+        title: prodServPaylod.title || 'Our high-grade, performance-powered products and services',
+        description: prodServPaylod.description || '',
+        tabs:[
+            {
+                text:prodServPaylod.tabs[0].text || 'Cloud Hosting',
+                image:prodServPaylod.tabs[0].image || '/assets/images/mw/cloud.svg"',
+                alt:prodServPaylod.tabs[0].alt || 'Cloud Hosting | MilesWeb India',
+            },
+            {
+                text:prodServPaylod.tabs[1].text || 'Business Email',
+                image:prodServPaylod.tabs[1].image || '/assets/images/mw/business-tab.svg',
+                alt:prodServPaylod.tabs[1].alt ||'Business Email | MilesWeb India',
+            },
+            {
+                text:prodServPaylod.tabs[2].text ||'Website Builder',
+                image:prodServPaylod.tabs[2].image || '/assets/images/mw/builder-tab.svg',
+                alt:prodServPaylod.tabs[2].alt ||'Website Builder | MilesWeb India',
+            },
+            {
+                text:prodServPaylod.tabs[3].text ||'Domain',
+                image:prodServPaylod.tabs[3].image || '/assets/images/mw/domain-tab.svg',
+                alt:prodServPaylod.tabs[3].alt ||'Domain | MilesWeb India',
+            }
+        ],
+        tabsContent:[
+            {
+                text:prodServPaylod.tabsContent[0].text ||'Fully optimized cloud hosting',
+                description:prodServPaylod.tabsContent[0].description ||'Our feature-rich cloud hosting plans optimally offer top-tier server specs and high uptime to ensure peak performance for your website around the clock.',
+                btn: {
+                    text: prodServPaylod.tabsContent[0].btn.text ||'View plans',
+                    link: prodServPaylod.tabsContent[0].btn.link ||'/hosting/cloud-hosting/',
+                },
+                image:prodServPaylod.tabsContent[0].image ||'/assets/images/mw/cloud-hosting.gif',
+                alt:prodServPaylod.tabsContent[0].alt ||'Fully optimized cloud hosting | MilesWeb India',
+            },
+            {
+                text:prodServPaylod.tabsContent[1].text ||'Professional email that grows with your business.',
+                description:prodServPaylod.tabsContent[1].description ||'Get custom business emails that match your brand and align with your domain.',
+                btn: {
+                    text: prodServPaylod.tabsContent[1].btn.text ||'Get Started',
+                    link: prodServPaylod.tabsContent[1].btn.link ||'/business-email',
+                },
+                image:prodServPaylod.tabsContent[1].image ||'/assets/images/mw/business-email.gif',
+                alt:prodServPaylod.tabsContent[1].alt ||'Professional email that grows with your business | MilesWeb India',
+            },
+            {
+                text:prodServPaylod.tabsContent[2].text ||'Build a professional website in minutes.',
+                description:prodServPaylod.tabsContent[2].description ||'Our AI website builder designs your site for a simplified online journey.',
+                btn: {
+                    text: prodServPaylod.tabsContent[2].btn.text ||'Build with AI',
+                    link: prodServPaylod.tabsContent[2].btn.link ||'/ai-website-builder',
+                },
+                image:prodServPaylod.tabsContent[2].image ||'/assets/images/mw/website-builder.gif',
+                alt:prodServPaylod.tabsContent[2].alt ||'Build a professional website in minutes | MilesWeb India',
+            },
+            {
+                text:prodServPaylod.tabsContent[3].text ||'A dream domain for a strong web presence.',
+                description:prodServPaylod.tabsContent[3].description ||'Our AI domain generator finds you the ideal domain name in seconds.',
+                btn: {
+                    text: prodServPaylod.tabsContent[3].btn.text ||'Get Your Domain',
+                    link: prodServPaylod.tabsContent[3].btn.link ||'/domains/',
+                },
+                image:prodServPaylod.tabsContent[3].image ||'/assets/images/mw/domain.gif',
+                alt:prodServPaylod.tabsContent[3].alt ||'A dream domain for a strong web presence | MilesWeb India',
+            }
+        ]
+    }
+
 </script>
 
 <template>
@@ -246,6 +316,7 @@ const migration = {
             </div>
         </div>
         </section>
+        <ProductAndServices v-bind="productAndServices"/>
     </div>
 </template>
 <style scoped>
