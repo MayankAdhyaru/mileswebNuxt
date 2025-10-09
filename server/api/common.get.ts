@@ -18,7 +18,7 @@ export default defineEventHandler(() => {
     },
     plansName: {
       web_1: "Ignite",
-      web_2: "Elite",
+      web_2: "Premium",
       web_3: "Stellar",
     },
     strikePrice: {

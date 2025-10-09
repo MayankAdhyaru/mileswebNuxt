@@ -152,6 +152,7 @@ const hero = {
                 </div>
             </div>
         </section>
+        <ComparisonTbl/>
     </div>
 </template>
 <style scoped>
