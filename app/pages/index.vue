@@ -3,6 +3,7 @@ import '~/assets/css/main.css'
 import Hero from '~/components/Hero.vue'
 import Newrating from '~/components/Newrating.vue'
 import CaseStudy from '~/components/CaseStudy.vue'
+import Migration from '~/components/Migration.vue'
 import { ref, onMounted } from 'vue'
 
 // ✅ SSR-fetch indexPage (rarely changes)
@@ -24,6 +25,8 @@ const heroPayload = apiData?.value?.hero || {}
 const headPayload = apiData.value?.head || {}
 const supportPayload = apiData.value?.support || {}
 const mpanelPayload = apiData.value?.mpanel || {}
+const migrationPayload = apiData.value?.migration || {}
+const whyChoosePayload = apiData.value?.whyChoose || {}
 // SEO for this page
 useHead({
   title: headPayload.title,
@@ -66,6 +69,54 @@ const hero = {
   // include guarantee etc. if present
   guarantee: heroPayload?.guarantee || {}
 }
+
+const migration = {
+    title : migrationPayload.title || 'Free website migration, fully managed by Us',
+    description : migrationPayload.description || 'Our experts handle the technical aspects of moving your website, with data security at the utmost priority. So sit back and enjoy a stress-free transition to our platform without any additional costs.',
+    image : migrationPayload.image || '/assets/images/mw/migration.gif',
+    alt: migrationPayload.alt || 'Free website migration, fully managed by Us | MilesWeb India',
+    btn:{
+        text:migrationPayload.btn.text || 'Migrate now!',
+        link:migrationPayload.btn.link ||'',
+    }
+}
+
+    const whyChoose = {
+        title : whyChoosePayload.title ||'Web hosting that works for you: Our unstoppable platform!',
+        description :whyChoosePayload.description ||`MilesWeb'The all-in-one web hosting solution is designed for speed, security, and the unique needs of the Indian market.`,
+        btn:{
+            text:whyChoosePayload.btn.text ||'Get Started',
+            link:whyChoosePayload.btn.link ||''
+        },
+        image:whyChoosePayload.image || '/assets/images/mw/smart-hosting.gif',
+        alt:whyChoosePayload.alt ||'Smart Hosting. Smarter Growth | MilesWeb India',
+        features:[
+            {
+                title:whyChoosePayload.features[0].title ||'Always secure with free SSL',
+                description:whyChoosePayload.features[0].description ||'Instantly protect your site and your visitors with our free SSL certificates.',
+                icons:{
+                    path:whyChoosePayload.features[0].icons.path ||'/assets/images/mw/security.png',
+                    alt:whyChoosePayload.features[0].icons.alt ||'Always secure with free SSL | MilesWeb India'
+                }
+            },
+            {
+                title:whyChoosePayload.features[1].title ||'All-in-one hosting toolkit',
+                description:whyChoosePayload.features[1].description ||'Everything you need in one dashboard without extra plugins or costs.',
+                icons:{
+                    path:whyChoosePayload.features[1].icons.path ||'/assets/images/mw/toolkit.png',
+                    alt:whyChoosePayload.features[1].icons.alt ||'All-in-one hosting toolkit | MilesWeb India'
+                }
+            },
+            {
+                title:whyChoosePayload.features[2].title ||'Zero-risk guarantee',
+                description:whyChoosePayload.features[2].description || `Try us for 30 days and if you're not 100% satisfied, get your money back.`,
+                icons:{
+                    path:whyChoosePayload.features[2].icons.path ||'/assets/images/mw/growing.png',
+                    alt:whyChoosePayload.features[2].icons.alt || 'Zero-risk guarantee | MilesWeb India'
+                }
+            },
+        ]
+    }
 </script>
 
 <template>
@@ -105,7 +156,9 @@ const hero = {
                 </div>
             </div>
         </section>
+        <!-- CaseStudy Section  -->
         <CaseStudy/>
+        <!-- Mpanel Section  -->
         <section class="pb-45 mw_account_mb_none">
             <div class="mw_account pt-90 pb-90">
                 <div class="mw-container">
@@ -152,7 +205,47 @@ const hero = {
                 </div>
             </div>
         </section>
+        <!-- Hosting Comparison Table -->
         <ComparisonTbl/>
+        <!-- Migration Section  -->
+        <Migration v-bind="migration"/>
+        <!-- Whychoose Us Section  -->
+        <section class="sections-space mw_unstoppable px-md-6">
+        <div class="mw-container">
+            <div class="mw-row mw-align-center">
+            <div class="mw-col-lg-6 mw_smart_order2">
+                <div class="title-center ho-global-img pt-md-24">
+                    <img class="img-fluid" :src="whyChoose.image" :alt="whyChoose.alt" :title="whyChoose.alt" loading="lazy">
+                </div>
+            </div>
+            <div class="mw-col-lg-6 pl-30 pb-lg-30 mw_smart_content">
+                <div class="pl-10">
+                    <div class="pb-30">
+                        <h2 class="mw-h2" v-html="whyChoose.title"></h2>
+                        <p class="mw-p pb-30" v-html="whyChoose.description"></p>
+                        <span class="mw-btn jump-to-plans mw_smart_button" v-html="whyChoose.btn.text"></span>
+                    </div>
+                    <div class="mw_smart_content_box">
+                        <div class="mw_smart_content_zi1">
+                        <div class="d-flex" v-for="(feature, index) in whyChoose.features" :class="index < whyChoose.features.length - 1 ? 'mw_focus_row1' : ''" :key="index">
+                            <span class="off-support-img">
+                                <img :src="feature.icons.path" :alt="feature.icons.alt" :title="feature.icons.alt" class="img-fluid" loading="lazy">
+                            </span>
+                            <div class="pl-22">
+                            <div class="mw-h4 pb-6" v-html="feature.title"></div>
+                            <div class="mw_focus_h4_p mw-h3-p" v-html="feature.description"></div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="title-center mw_smart_button_none pt-22">
+                        <span class="mw-btn jump-to-plans">{{ whyChoose.btn.text }}</span>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </section>
     </div>
 </template>
 <style scoped>

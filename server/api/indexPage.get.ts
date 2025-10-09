@@ -110,5 +110,55 @@ export default defineEventHandler(async () => {
 
     }
 
-    return { hero, head, support, mpanel};
+    const migration = {
+        title : 'Free website migration, fully managed by Us',
+        description : 'Our experts handle the technical aspects of moving your website, with data security at the utmost priority. So sit back and enjoy a stress-free transition to our platform without any additional costs.',
+        image : '/assets/images/mw/migration.gif',
+        alt: 'Free website migration, fully managed by Us | MilesWeb India',
+        btn:{
+            text:'Migrate now!',
+            link:''
+        }
+    }
+
+    const whyChoose = {
+        title : 'Web hosting that works for you: Our unstoppable platform!',
+        description : 'The all-in-one web hosting solution is designed for speed, security, and the unique needs of the Indian market.',
+        btn:{
+            text:'Get Started',
+            link:''
+        },
+        image:'/assets/images/mw/smart-hosting.gif',
+        alt:'Smart Hosting. Smarter Growth | MilesWeb India',
+        features:[
+            {
+                title:'Always secure with free SSL',
+                description:'Instantly protect your site and your visitors with our free SSL certificates.',
+                icons:{
+                    path:'/assets/images/mw/security.png',
+                    alt:'Always secure with free SSL | MilesWeb India'
+                }
+            },
+            {
+                title:'All-in-one hosting toolkit',
+                description:'Everything you need in one dashboard without extra plugins or costs.',
+                icons:{
+                    path:'/assets/images/mw/toolkit.png',
+                    alt:'All-in-one hosting toolkit | MilesWeb India'
+                }
+            },
+            {
+                title:'Zero-risk guarantee',
+                description:`Try us for 30 days and if you're not 100% satisfied, get your money back.`,
+                icons:{
+                    path:'/assets/images/mw/security.png',
+                    alt:'Zero-risk guarantee | MilesWeb India'
+                }
+            },
+        ]
+
+
+    }
+
+    return { hero, head, support, mpanel, migration, whyChoose};
 });

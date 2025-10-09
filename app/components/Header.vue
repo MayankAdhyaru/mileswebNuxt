@@ -8,10 +8,10 @@
     
                             <div class="mw-menu-logo">
                                 <!-- Logo -->
-                                <NuxtLink to="/" class="mw-menu-logo-a">
+                                <a href="/" class="mw-menu-logo-a">
                                     <img src="/assets/images/home/mw-logo.svg" class="mw-menu-logo-1" alt="Web Hosting India | MilesWeb" title="Web Hosting India | MilesWeb" />
                                     <img src="/assets/images/home/milesweb-white.svg" class="mw-menu-logo-1 mw-menu-logo-2" alt="Web Hosting India | MilesWeb" title="Web Hosting India | MilesWeb" />
-                                </NuxtLink>
+                                </a>
                             </div>
     
                             <div class="mw-menu-left-2">
@@ -25,25 +25,25 @@
                                             <div v-show="openDropdown === 'hosting'" class="mw-submenu">
                                                 <ul class="mw-sub-content-ul">
                                                     <li class="mw-sub-content-li">
-                                                        <NuxtLink class="mw-sub-content-lnk" to="/hosting/web-hosting">Web Hosting</NuxtLink>
+                                                        <a class="mw-sub-content-lnk" href="/hosting/web-hosting">Web Hosting</a>
                                                         <span class="drop-link-sup-tt">80% OFF</span>
                                                         <p>For new and small business websites</p>
                                                     </li>
                                                     <li class="mw-sub-content-li">
-                                                        <NuxtLink class="mw-sub-content-lnk" to="/hosting/cloud-hosting/">Cloud Hosting</NuxtLink>
+                                                        <a class="mw-sub-content-lnk" href="/hosting/cloud-hosting/">Cloud Hosting</a>
                                                         <span class="drop-link-sup-tt">PREMIUM</span>
                                                         <p>Best for rapidly growing websites</p>
                                                     </li>
                                                     <li class="mw-sub-content-li">
-                                                        <NuxtLink class="mw-sub-content-lnk" to="/hosting/reseller-hosting/">Reseller Hosting</NuxtLink>
+                                                        <a class="mw-sub-content-lnk" href="/hosting/reseller-hosting/">Reseller Hosting</a>
                                                         <p>Perfect for reselling hosting services</p>
                                                     </li>
                                                     <li class="mw-sub-content-li">
-                                                        <NuxtLink class="mw-sub-content-lnk" to="/hosting/cpanel-hosting">cPanel Hosting</NuxtLink>
+                                                        <a class="mw-sub-content-lnk" href="/hosting/cpanel-hosting">cPanel Hosting</a>
                                                         <p>Deploy and manage node.js apps</p>
                                                     </li>
                                                     <li class="mw-sub-content-li">
-                                                        <NuxtLink class="mw-sub-content-lnk" to="/ai-website-builder">Website Builder</NuxtLink>
+                                                        <a class="mw-sub-content-lnk" href="/ai-website-builder">Website Builder</a>
                                                         <p>No coding, just smart AI design</p>
                                                     </li>
                                                 </ul>
@@ -57,12 +57,12 @@
                                             <div v-show="openDropdown === 'wordpress'" class="mw-submenu">
                                                 <ul class="mw-sub-content-ul">
                                                     <li class="mw-sub-content-li">
-                                                        <NuxtLink class="mw-sub-content-lnk" to="/hosting/wordpress-hosting/">WordPress Hosting</NuxtLink>
+                                                        <a class="mw-sub-content-lnk" href="/hosting/wordpress-hosting/">WordPress Hosting</a>
                                                         <span class="drop-link-sup-tt">AI-Powered</span>
                                                         <p>For new and growing WordPress sites</p>
                                                     </li>
                                                     <li class="mw-sub-content-li">
-                                                        <NuxtLink class="mw-sub-content-lnk" to="/hosting/woocommerce-hosting">WooCommerce Hosting</NuxtLink>
+                                                        <a class="mw-sub-content-lnk" href="/hosting/woocommerce-hosting">WooCommerce Hosting</a>
                                                         <p>Designed for selling online easily</p>
                                                     </li>
                                                 </ul>
@@ -75,23 +75,23 @@
                                             <div v-show="openDropdown === 'vps'" class="mw-submenu">
                                                 <ul class="mw-sub-content-ul">
                                                     <li class="mw-sub-content-li">
-                                                        <NuxtLink class="mw-sub-content-lnk" to="/hosting/vps-hosting/">VPS Hosting</NuxtLink>
+                                                        <a class="mw-sub-content-lnk" href="/hosting/vps-hosting/">VPS Hosting</a>
                                                         <p>For more power and control</p>
                                                     </li>
                                                     <li class="mw-sub-content-li">
-                                                        <NuxtLink class="mw-sub-content-lnk" to="/hosting/vps-hosting/managed-vps-hosting">Managed VPS Hosting</NuxtLink>
+                                                        <a class="mw-sub-content-lnk" href="/hosting/vps-hosting/managed-vps-hosting">Managed VPS Hosting</a>
                                                         <p>We manage your VPS for you</p>
                                                     </li>
                                                     <li class="mw-sub-content-li">
-                                                        <NuxtLink class="mw-sub-content-lnk" to="/hosting/vps-hosting/windows-vps">Windows VPS</NuxtLink>
+                                                        <a class="mw-sub-content-lnk" href="/hosting/vps-hosting/windows-vps">Windows VPS</a>
                                                         <p>Ideal for ASP.NET and Windows apps</p>
                                                     </li>
                                                     <li class="mw-sub-content-li">
-                                                        <NuxtLink class="mw-sub-content-lnk" to="/hosting/dedicated-servers/">Dedicated Server</NuxtLink>
+                                                        <a class="mw-sub-content-lnk" href="/hosting/dedicated-servers/">Dedicated Server</a>
                                                         <p>Ideal for ASP.NET and Windows apps</p>
                                                     </li>
                                                     <li class="mw-sub-content-li">
-                                                        <NuxtLink class="mw-sub-content-lnk" to="/hosting/vps-hosting/n8n">n8n VPS</NuxtLink>
+                                                        <a class="mw-sub-content-lnk" href="/hosting/vps-hosting/n8n">n8n VPS</a>
                                                         <span class="drop-link-sup-tt">POPULAR</span>
                                                         <p>Scalable VPS for n8n users</p>
                                                     </li>
@@ -105,16 +105,16 @@
                                             <div v-show="openDropdown === 'domain'" class="mw-submenu">
                                                 <ul class="mw-sub-content-ul">
                                                     <li class="mw-sub-content-li">
-                                                        <NuxtLink class="mw-sub-content-lnk" to="/domains/">Domain</NuxtLink>
+                                                        <a class="mw-sub-content-lnk" href="/domains/">Domain</a>
                                                         <p>Register your domain name</p>
                                                     </li>
                                                     <li class="mw-sub-content-li">
-                                                        <NuxtLink class="mw-sub-content-lnk" to="/business-email">Business Email</NuxtLink>
+                                                        <a class="mw-sub-content-lnk" href="/business-email">Business Email</a>
                                                         <span class="drop-link-sup-tt">81% OFF</span>
                                                         <p>Professional email for startups</p>
                                                     </li>
                                                     <li class="mw-sub-content-li">
-                                                        <NuxtLink class="mw-sub-content-lnk" to="/google-workspace">Google Workspace</NuxtLink>
+                                                        <a class="mw-sub-content-lnk" href="/google-workspace">Google Workspace</a>
                                                         <p>Smart tools for everyday work</p>
                                                     </li>
                                                 </ul>
@@ -127,7 +127,7 @@
                                             <div v-show="openDropdown === 'support'" class="mw-submenu">
                                                 <ul class="mw-sub-content-ul">
                                                     <li class="mw-sub-content-li">
-                                                        <a class="mw-sub-content-lnk" to="/hosting-faqs/">Knowledge Base</a>
+                                                        <a class="mw-sub-content-lnk" href="/hosting-faqs/">Knowledge Base</a>
                                                         <p>Find instant answers and solutions</p>
                                                     </li>
                                                     <li class="mw-sub-content-li">
@@ -137,18 +137,18 @@
                                                         <p>Step-by-step guides and how-tos</p>
                                                     </li>
                                                     <li class="mw-sub-content-li">
-                                                        <NuxtLink class="mw-sub-content-lnk" to="/contact">Contact</NuxtLink>
+                                                        <a class="mw-sub-content-lnk" href="/contact">Contact</a>
                                                         <p>Reach our support team anytime</p>
                                                     </li>
                                                 </ul>
                                             </div>
                                         </li>
                                         <!-- Pricing -->
-                                        <li>
-                                            <NuxtLink class="mw-navigation-show-a" to="/hosting/"><div class="mw-menu-tabs mw-menu-wi-tabs">Pricing</div></NuxtLink>
+                                            <li>
+                                            <a class="mw-navigation-show-a" href="/hosting/"><div class="mw-menu-tabs mw-menu-wi-tabs">Pricing</div></a>
                                         </li>
                                         <li>
-                                            <a class="d-flex" target="_blank"  to="https://my.milesweb.com/clientarea.php"><span class="mw_user_icon">Log In</span></a>
+                                            <a class="d-flex" target="_blank" href="https://my.milesweb.com/clientarea.php"><span class="mw_user_icon">Log In</span></a>
                                         </li>
                                         <li class="mw-flag-dropdown-small">
                                             <div class="mw-flag-dropdown">
