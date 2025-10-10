@@ -61,12 +61,11 @@ export default defineEventHandler(() => {
   }
 
   // ✅ Return everything + the functions themselves
-  return {
-    common: {
-      ...common,
-      save,
-      getDiscount,
-      getSave
-    }
-  }
+return {
+  ...common,
+  save,
+  getDiscount,
+  getSave
+}
+
 })
