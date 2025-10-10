@@ -4,6 +4,7 @@ import Hero from '~/components/Hero.vue'
 import Newrating from '~/components/Newrating.vue'
 import CaseStudy from '~/components/CaseStudy.vue'
 import Migration from '~/components/Migration.vue'
+import CustomerReviews from '~/components/CustomerReviews.vue'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 // ✅ SSR-fetch indexPage (rarely changes)
@@ -539,6 +540,8 @@ onBeforeUnmount(() => {
                 </div>
             </div>
         </section>
+        <!-- Customer Reviews Section  -->
+         <CustomerReviews/>
     </div>
 </template>
 <style scoped>

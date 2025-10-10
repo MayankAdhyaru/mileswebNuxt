@@ -240,7 +240,6 @@ export default defineEventHandler(async () => {
                 list:[],
                 image:{
                     path:'/assets/images/mw/speed.svg',
-                    path2:'/assets/images/mw/speed-grid.png',
                     alt:'High-speed hosting | MilesWeb India'
                 }
             },
