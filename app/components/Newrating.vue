@@ -88,7 +88,7 @@ const ratingItems: RatingKey[] = ['trustpilot', 'hostadvice', 'google']
                         <div class="mw_trust_img">
                           <img
                             class="img-fluid"
-                            :src="commonPayload.ratingSection[key].newlogo"
+                            :src="commonPayload.ratingSection[key].newlogo || '/assets/images/hosting/trustpilot.svg'"
                             :alt="commonPayload.ratingSection[key].alt"
                             :title="commonPayload.ratingSection[key].alt"
                           />
@@ -116,7 +116,7 @@ const ratingItems: RatingKey[] = ['trustpilot', 'hostadvice', 'google']
                     <div class="mw_trust_img">
                         <img
                             class="img-fluid"
-                            :src="commonPayload.ratingSection[key].newlogo"
+                            :src="commonPayload.ratingSection[key].newlogo || '/assets/images/mw/hostadvice.svg'"
                             :alt="commonPayload.ratingSection[key].alt"
                             :title="commonPayload.ratingSection[key].alt"
                         />

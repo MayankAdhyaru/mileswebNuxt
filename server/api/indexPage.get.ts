@@ -226,6 +226,82 @@ export default defineEventHandler(async () => {
             }
         ]
     }
+    const PowerHouse = {
+        title:'MilesWeb: India’s web hosting powerhouse',
+        description:'Everything you need to build, grow, and scale your online presence with confidence.',
+        features:[
+            {
+                title:'High-speed hosting',
+                description:'Boost your site’s loading speed with advanced LiteSpeed servers and LSCache technology.',
+                btn:{
+                    text:'Get Started',
+                    link:''
+                },
+                list:[],
+                image:{
+                    path:'/assets/images/mw/speed.svg',
+                    path2:'/assets/images/mw/speed-grid.png',
+                    alt:'High-speed hosting | MilesWeb India'
+                }
+            },
+            {
+                title:'Top website performance metrics',
+                description:'Real-time insights into website loading speed',
+                btn:{
+                    text:'Get Started',
+                    link:''
+                },
+                list:[
+                    'Blazing fast TTFB (Time to First Byte)',
+                    'Maximized sales and  conversion rates',
+                    'Top-notch SSD NVMe storage drives'
 
-    return { hero, head, support, mpanel, migration, whyChoose, productAndServices};
+                ],
+                image:{
+                    path:'/assets/images/mw/performance.svg',
+                    path2:'/assets/images/mw/uptime.png',
+                    alt:'Top website performance metrics | MilesWeb India'
+                }
+            },
+            {
+                title:'Hosting that drives business growth',
+                description:'Speed-optimized hosting improves engagement and search rankings.',
+                btn:{
+                    text:'',
+                    link:''
+                },
+                list:[
+                    'Sub-2.5s LCP, for instant user experience.',
+                    'Near-zero CLS for a stable, professional site.',
+                    '100ms INP for a responsive site'
+
+                ],
+                image:{
+                    path:'/assets/images/mw/drive.svg',
+                    path2:'/assets/images/mw/core-web.png',
+                    alt:'Hosting that drives business growth | MilesWeb India'
+                }
+            },
+            {
+                title:'Game-Changer for Speed!',
+                description:'Experience next-level speed and performance built for high-traffic websites.',
+                btn:{
+                    text:'',
+                    link:''
+                },
+                list:[
+                    '“ Our website now delivers twice the speed, ensuring a faster, smoother, and more seamless experience. “',
+                    'Gaurav Patil',
+                    'Director. Standard Wings Technologies.',
+                ],
+                image:{
+                    path:'/assets/images/mw/gaurav-patil.png',
+                    alt:'High-speed hosting | MilesWeb India'
+                }
+            }
+
+        ]
+    }
+
+    return { hero, head, support, mpanel, migration, whyChoose, productAndServices, PowerHouse};
 });

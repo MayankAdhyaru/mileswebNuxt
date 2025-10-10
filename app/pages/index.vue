@@ -4,7 +4,7 @@ import Hero from '~/components/Hero.vue'
 import Newrating from '~/components/Newrating.vue'
 import CaseStudy from '~/components/CaseStudy.vue'
 import Migration from '~/components/Migration.vue'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 // ✅ SSR-fetch indexPage (rarely changes)
 const { data: apiData } = await useAsyncData('hero', () => $fetch('/api/indexPage'))
@@ -28,6 +28,7 @@ const mpanelPayload = apiData.value?.mpanel || {}
 const migrationPayload = apiData.value?.migration || {}
 const whyChoosePayload = apiData.value?.whyChoose || {}
 const prodServPaylod = apiData.value?.productAndServices || {}
+const PowerHousePaylod = apiData.value?.PowerHouse || {}
 // SEO for this page
 useHead({
   title: headPayload.title,
@@ -81,6 +82,71 @@ const migration = {
         link:migrationPayload.btn.link ||'',
     }
 }
+
+// Rotating wave text (replaces legacy jQuery rolodex)
+// We'll keep the visible "active" item as the 5th child (index 4) just like the original.
+const waveItems = ref([
+    'Speeds Up Websites.',
+    'Assists You Anytime.',
+    'Runs on Trusted Infrastructure.',
+    'Makes Hosting Affordable.',
+    'Delivers Fast Hosting.',
+    'Puts Customers First.',
+    'Secures Your Site.',
+    'Protects Your Data.',
+    'Scales With You.'
+])
+const waveRef = ref(null)
+const activeWaveIndex = ref(4) // keep nth-child(5) active by default
+let waveInterval = null
+const waveTimeouts = []
+const WAVE_ANIMATE_DELAY = 900
+const WAVE_INTERVAL = 2600
+const WAVE_EASE = 'transform 0.8s cubic-bezier(0.7, 0, 0.3, 1)'
+
+function rotateWave() {
+    const el = waveRef.value
+    if (!el) return
+    const firstItem = el.querySelector('.mw_wave_dynamic_item')
+    if (!firstItem) return
+
+    const height = firstItem.offsetHeight || firstItem.clientHeight || 0
+    // hide active state during animation
+    activeWaveIndex.value = -1
+
+    // animate the container up by one item's height
+    el.style.transition = WAVE_EASE
+    el.style.transform = `translateY(-${height}px)`
+
+    // after the animation delay, rotate the array and reset transform without animation
+    const t = setTimeout(() => {
+        el.style.transition = 'none'
+        // rotate: move first element to the end
+        const first = waveItems.value.shift()
+        if (typeof first !== 'undefined') waveItems.value.push(first)
+        // reset transform
+        el.style.transform = 'translateY(0)'
+        // restore the active index to the 5th child
+        activeWaveIndex.value = 4
+        // small delay before restoring transition so the reset is instant
+        const t2 = setTimeout(() => {
+            el.style.transition = WAVE_EASE
+        }, 50)
+        waveTimeouts.push(t2)
+    }, WAVE_ANIMATE_DELAY)
+
+    waveTimeouts.push(t)
+}
+
+onMounted(() => {
+    // start rotation interval
+    waveInterval = setInterval(rotateWave, WAVE_INTERVAL)
+})
+
+onBeforeUnmount(() => {
+    if (waveInterval) clearInterval(waveInterval)
+    waveTimeouts.forEach(id => clearTimeout(id))
+})
 
     const whyChoose = {
         title : whyChoosePayload.title ||'Web hosting that works for you: Our unstoppable platform!',
@@ -281,42 +347,198 @@ const migration = {
         <Migration v-bind="migration"/>
         <!-- Whychoose Us Section  -->
         <section class="sections-space mw_unstoppable px-md-6">
-        <div class="mw-container">
-            <div class="mw-row mw-align-center">
-            <div class="mw-col-lg-6 mw_smart_order2">
-                <div class="title-center ho-global-img pt-md-24">
-                    <img class="img-fluid" :src="whyChoose.image" :alt="whyChoose.alt" :title="whyChoose.alt" loading="lazy">
+            <div class="mw-container">
+                <div class="mw-row mw-align-center">
+                <div class="mw-col-lg-6 mw_smart_order2">
+                    <div class="title-center ho-global-img pt-md-24">
+                        <img class="img-fluid" :src="whyChoose.image" :alt="whyChoose.alt" :title="whyChoose.alt" loading="lazy">
+                    </div>
+                </div>
+                <div class="mw-col-lg-6 pl-30 pb-lg-30 mw_smart_content">
+                    <div class="pl-10">
+                        <div class="pb-30">
+                            <h2 class="mw-h2" v-html="whyChoose.title"></h2>
+                            <p class="mw-p pb-30" v-html="whyChoose.description"></p>
+                            <span class="mw-btn jump-to-plans mw_smart_button" v-html="whyChoose.btn.text"></span>
+                        </div>
+                        <div class="mw_smart_content_box">
+                            <div class="mw_smart_content_zi1">
+                            <div class="d-flex" v-for="(feature, index) in whyChoose.features" :class="index < whyChoose.features.length - 1 ? 'mw_focus_row1' : ''" :key="index">
+                                <span class="off-support-img">
+                                    <img :src="feature.icons.path" :alt="feature.icons.alt" :title="feature.icons.alt" class="img-fluid" loading="lazy">
+                                </span>
+                                <div class="pl-22">
+                                <div class="mw-h4 pb-6" v-html="feature.title"></div>
+                                <div class="mw_focus_h4_p mw-h3-p" v-html="feature.description"></div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="title-center mw_smart_button_none pt-22">
+                            <span class="mw-btn jump-to-plans">{{ whyChoose.btn.text }}</span>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
-            <div class="mw-col-lg-6 pl-30 pb-lg-30 mw_smart_content">
-                <div class="pl-10">
-                    <div class="pb-30">
-                        <h2 class="mw-h2" v-html="whyChoose.title"></h2>
-                        <p class="mw-p pb-30" v-html="whyChoose.description"></p>
-                        <span class="mw-btn jump-to-plans mw_smart_button" v-html="whyChoose.btn.text"></span>
+        </section>
+        <ProductAndServices v-bind="productAndServices"/>
+        <!-- Stisfaction Section  -->
+        <div class="sections-space">
+            <div class="mw_wave_box1">
+                <div class="mw-container">
+                    <div class="d-flex mw-align-center mw-justify-center">
+                        <div class="mw_wave_h2">MilesWeb</div>
+                        <div class="mw_wave_rolodex_container">
+                            <ul class="mw_wave_dynamic_text" ref="waveRef">
+                                <li v-for="(item, idx) in waveItems" :key="idx" class="mw_wave_dynamic_item" :class="{ active: idx === activeWaveIndex }">{{ item }}</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="mw_smart_content_box">
-                        <div class="mw_smart_content_zi1">
-                        <div class="d-flex" v-for="(feature, index) in whyChoose.features" :class="index < whyChoose.features.length - 1 ? 'mw_focus_row1' : ''" :key="index">
-                            <span class="off-support-img">
-                                <img :src="feature.icons.path" :alt="feature.icons.alt" :title="feature.icons.alt" class="img-fluid" loading="lazy">
-                            </span>
-                            <div class="pl-22">
-                            <div class="mw-h4 pb-6" v-html="feature.title"></div>
-                            <div class="mw_focus_h4_p mw-h3-p" v-html="feature.description"></div>
+                </div>
+            </div>
+            <div class="mw_wave_box2">
+                <div class="mw-container">
+                    <div class="mw-row">
+                        <div class="mw-col-sm-3">
+                            <div class="title-center mw_wave_box2_col">
+                                <div class="pb-30">
+                                    <img loading="lazy" src="/assets/images/mw/happy-customers.png" class="img-fluid" alt="Happy customers | MilesWeb India" title="Happy customers | MilesWeb India">
+                                </div>
+                                <div class="mw_wave_box2_h3 mw-h3-lg pb-6">{{commonPayload.customerCount}}</div>
+                                <p class="mw-h3-p">Happy customers</p>
+                            </div>
+                        </div>
+                        <div class="mw-col-sm-3">
+                            <div class="title-center mw_wave_box2_col">
+                                <div class="pb-30">
+                                    <img loading="lazy" src="/assets/images/mw/satisfaction.svg" class="img-fluid" alt="Satisfaction Rate | MilesWeb India" title="Satisfaction Rate | MilesWeb India">
+                                </div>
+                                <div class="mw_wave_box2_h3 mw-h3-lg pb-6">96%</div>
+                                <p class="mw-h3-p">Satisfaction rate</p>
+                            </div>
+                        </div>
+                        <div class="mw-col-sm-3">
+                            <div class="title-center mw_wave_box2_col">
+                                <div class="pb-30">
+                                    <img loading="lazy" src="/assets/images/mw/experience.svg" class="img-fluid" alt="Years Of Experience | MilesWeb India" title="Years Of Experience | MilesWeb India">
+                                </div>
+                                <div class="mw_wave_box2_h3 mw-h3-lg pb-6">13+ Years</div>
+                                <p class="mw-h3-p">of experience</p>
+                            </div>
+                        </div>
+                        <div class="mw-col-sm-3">
+                            <div class="title-center mw_wave_box2_col">
+                                <div class="pb-30">
+                                    <img loading="lazy" src="/assets/images/mw/expert-support.svg" class="img-fluid" alt="Expert support | MilesWeb India" title="Expert support | MilesWeb India">
+                                </div>
+                                <div class="mw_wave_box2_h3 mw-h3-lg pb-6">24/7</div>
+                                <p class="mw-h3-p">Expert support</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Milesweb PowerHouse Section -->
+        <section class="pt-45 pb-45 px-md-6">
+            <div class="mw-container">
+                <div class="title-center pb-45">
+                    <h2 class="mw-h2" v-html="PowerHousePaylod.title"></h2>
+                    <p class="mw-p" v-html="PowerHousePaylod.description"></p>
+                </div>
+                <div class="mw-row">
+                    <!-- Feature 1: High-speed hosting -->
+                    <div class="mw-col-lg-4 mw-col-md-6 pb-30 d-flex mw_game_col_ord pt-lg-30 mw_mobile_none" v-if="PowerHousePaylod.features?.[0]">
+                        <div class="mw_powerhouse_box">
+                        <div>
+                            <div class="pb-10">
+                            <img class="img-fluid" :src="PowerHousePaylod.features[0].image.path" loading="lazy" :alt="PowerHousePaylod.features[0].image.alt" :title="PowerHousePaylod.features[0].image.alt"/>
+                            </div>
+                            <div class="mw_powerhouse_h3 fff" v-html="PowerHousePaylod.features[0].title"></div>
+                            <div class="mw-p fff" v-html="PowerHousePaylod.features[0].description"></div>
+                        </div>
+                        <div v-if="PowerHousePaylod.features[0].btn.text">
+                            <a :href="PowerHousePaylod.features[0].btn.link" class="mw-btn mw-btn-white jump-to-plans" v-html="PowerHousePaylod.features[0].btn.text" ></a>
+                        </div>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2: Top website performance metrics -->
+                    <div class="mw-col-lg-8 pb-30 d-flex" v-if="PowerHousePaylod.features?.[1]">
+                        <div class="mw_powerhouse_box2">
+                        <div class="mw-row m0">
+                            <div class="mw-col-md-6 p-0">
+                            <div class="pb-10">
+                                <img class="img-fluid" :src="PowerHousePaylod.features[1].image.path" loading="lazy" :alt="PowerHousePaylod.features[1].image.alt" :title="PowerHousePaylod.features[1].image.alt" />
+                            </div>
+                            <div class="mw_powerhouse_h3" v-html="PowerHousePaylod.features[1].title"></div>
+                            <div class="mw-p mw_sub_clr pb-22" v-html="PowerHousePaylod.features[1].description"></div>
+                            <ul class="mw_powerhouse_list">
+                                <li v-for="(li, index) in PowerHousePaylod.features[1].list" :key="index" v-html="li"></li>
+                            </ul>
+                            </div>
+                            <div class="mw-col-md-6 p-0">
+                            <div class="mw_powerhouse_box2_img title-right">
+                                <img class="img-fluid" :src="PowerHousePaylod.features[1].image.path2" loading="lazy" :alt="PowerHousePaylod.features[1].image.alt" :title="PowerHousePaylod.features[1].image.alt" />
+                            </div>
                             </div>
                         </div>
                         </div>
                     </div>
-                    <div class="title-center mw_smart_button_none pt-22">
-                        <span class="mw-btn jump-to-plans">{{ whyChoose.btn.text }}</span>
+
+                    <!-- Feature 3: Hosting that drives business growth -->
+                    <div class="mw-col-lg-8 d-flex" v-if="PowerHousePaylod.features?.[2]">
+                        <div class="mw_powerhouse_box2">
+                        <div class="mw-row m0">
+                            <div class="mw-col-md-6 p-0">
+                            <div class="pb-10">
+                                <img class="img-fluid" :src="PowerHousePaylod.features[2].image.path" loading="lazy" :alt="PowerHousePaylod.features[2].image.alt" :title="PowerHousePaylod.features[2].image.alt" />
+                            </div>
+                            <div class="mw_powerhouse_h3" v-html="PowerHousePaylod.features[2].title"></div>
+                            <div class="mw-p mw_sub_clr pb-22" v-html="PowerHousePaylod.features[2].description"></div>
+                            <ul class="mw_powerhouse_list">
+                                <li v-for="(li, index) in PowerHousePaylod.features[2].list" :key="index" v-html="li"></li>
+                            </ul>
+                            </div>
+                            <div class="mw-col-md-6 p-0">
+                            <div class="mw_powerhouse_box2_img title-right">
+                                <img class="img-fluid" :src="PowerHousePaylod.features[2].image.path2" loading="lazy" :alt="PowerHousePaylod.features[2].image.alt" :title="PowerHousePaylod.features[2].image.alt" />
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <!-- Feature 4: Game-Changer for Speed -->
+                    <div
+                        class="mw-col-lg-4 d-flex mw-col-md-6 pt-lg-30 mw_mobile_none" v-if="PowerHousePaylod.features?.[3]" >
+                        <div class="mw_game_box">
+                            <div>
+                                <div class="pb-10">
+                                    <img class="img-fluid" src="/assets/images/mw/star.svg" loading="lazy" alt="Game-Changer for Speed! | MilesWeb India" title="Game-Changer for Speed! | MilesWeb India" />
+                                </div>
+                                <div class="mw_powerhouse_h3 fff" v-html="PowerHousePaylod.features[3].title"></div>
+                                <div class="mw-p" v-html="PowerHousePaylod.features[3].description"></div>
+                            </div>
+
+                            <div class="mw_game_box2">
+                                <p class="fff mw-h3-p pb-22" v-html="PowerHousePaylod.features[3].list[0]"></p>
+                                <div class="d-flex pb-30 mw-align-center">
+                                <span>
+                                    <img class="img-fluid" :src="PowerHousePaylod.features[3].image.path" loading="lazy" :alt="PowerHousePaylod.features[3].image.alt" :title="PowerHousePaylod.features[3].image.alt" width="54" height="54" />
+                                </span>
+                                <div class="pl-16">
+                                    <div class="mw_game_box2_h5 fff" v-html="PowerHousePaylod.features[3].list[1]"></div>
+                                    <span class="mw_game_box2_p" v-html="PowerHousePaylod.features[3].list[2]"></span>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            </div>
-        </div>
         </section>
-        <ProductAndServices v-bind="productAndServices"/>
     </div>
 </template>
 <style scoped>
@@ -331,4 +553,6 @@ const migration = {
 .mw_wave_h2{font-size:40px;color:var(--ttl_clr);position:relative;padding-right:24px;font-weight: 500;}
 .mw_wave_h2:after{content:'';position:absolute;top:-42px;right:0;width:127px;height:48px;background:url('/assets/images/mw/wave-pointer.svg') center center no-repeat;background-size:contain;transition:all .3s ease-in-out}
 .mw_wave_h2:before{content:'';position:absolute;top:-3px;left:-19px;width:24px;height:26px;background:url('/assets/images/mw/wave.svg') center center no-repeat;background-size:contain}.mw_wave_box2{box-shadow:-2px -18px 20px #645cfc1c;background:#f8f8ff;padding-bottom:62px;border-top:1px solid #d3cbc5}.mw_wave_box2_h3{font-weight:600}.mw_wave_box2_col{margin-top:-34px;position:relative}.mw_wave_box2_col:before{content:'';width:9px;height:9px;border-radius:50%;right:0;top:26.9px;position:absolute;background:#fff;border:1px solid #d3cbc5}.mw_wave_box2 .mw-col-sm-3:last-child .mw_wave_box2_col:before{display:none}@media(max-width:1200px){.mw_wave_h2{font-size:34px}.mw_wave_dynamic_text .mw_wave_dynamic_item{font-size:30px}.mw_wave_box1{padding:75px 0 62px}}@media(max-width:1100px){.mw_wave_box2_col:before{right:-30px}}@media(max-width:991px){.mw_wave_dynamic_text .mw_wave_dynamic_item{font-size:24px}.mw_wave_h2{font-size:20px}.mw_wave_h2:after{right:-3px;width:84px;height:78px;}}@media(max-width:768px){.mw_wave_box1{padding:44px 0 56px}.mw_wave_rolodex_container{height:125px;}.mw_wave_dynamic_text .mw_wave_dynamic_item{font-size:16px}.mw_wave_h2{font-size:18px;padding-right:0}.mw_wave_rolodex_container{padding:10px}.mw_wave_h2:before{top:-10px;left:-15px;width:18px;height:18px}.mw_wave_h2:after{width:56px;height:42px;top:-30px}}@media(max-width:650px){.mw-h3-p{font-size:14px}}@media(max-width:500px){.mw_wave_box2{border:none;padding-top:30px;box-shadow:unset;}.mw_wave_dynamic_text .mw_wave_dynamic_item{font-size:13px;padding:4px 0}.mw_wave_h2{font-size:14px}.mw_wave_h2:before{top:-8px;left:-8px;width:12px;height:14px}.mw_wave_box2_col:before{display:none}.mw_wave_box2_col{margin:20px 0 0}.mw_wave_box1{display:none;}.mw_wave_box2_col>.pb-30{padding-bottom:4px;}}
+
+.mw_powerhouse_box{background:linear-gradient(170.59deg,#645cfc 26.08%,rgba(100,92,252,.5) 83%,rgba(100,92,252,0) 137.69%);border-radius:30px;padding:30px 24px;position:relative;overflow:hidden;z-index:1;display:flex;flex-flow:column;justify-content:space-between}.mw_powerhouse_box .mw-h3{font-size:24px;font-weight:600}.mw_powerhouse_box .mw-p{padding-bottom:60px;letter-spacing:-.5px;font-size:17px}.mw_powerhouse_box:before{content:'';position:absolute;right:6px;bottom:6px;background:url(/assets/images/mw/light-speed.png) center center no-repeat;background-size:contain;width:164px;height:188px;z-index:-1}.mw_powerhouse_box:after{position:absolute;content:'';top:0;left:0;width:410px;height:314px;background:url('/assets/images/mw/speed-grid.png') center center no-repeat;z-index:-2}.mw_powerhouse_box .mw-btn{padding-inline:24px}.mw_powerhouse_box .mw-btn:before{right:26px}.mw_powerhouse_box .mw-btn:hover{padding-right:44px}.mw_powerhouse_box2{background:rgba(246,246,246,.6);border-radius:20px;border:4px solid #f1f1f163;padding:24px 0 0 24px;overflow:hidden}.mw_powerhouse_box2_img img{vertical-align:bottom}.mw_powerhouse_list li{position:relative;color:#020205;font-size:16px;padding-left:26px;margin-bottom:12px}.mw_powerhouse_list li:before{content:'';position:absolute;transform:translateY(40%);left:0;top:50%;width:18px;height:18px;background:url(/assets/images/mw/check.svg) center center no-repeat;background-size:contain;transform:translateY(-50%)}.mw_powerhouse_h3{font-size:24px;font-weight:500;color:var(--ttl_clr)}.mw_powerhouse_box2 .mw-p{max-width:266px}.mw_game_box{background:#020205;border-radius:20px;padding:30px 24px 0 24px;display:flex;flex-flow:column;justify-content:space-between;position:relative;overflow:hidden;z-index:1}.mw_game_box:after{position:absolute;content:'';top:-16px;left:0;width:410px;height:314px;background:url(/assets/images/mw/game-grid.png) center center no-repeat;z-index:-1}.mw_game_box2{background:#33334c;border:1px solid #56566b;border-radius:24px 24px 0 0;padding:24px 20px 0}.mw_game_box .mw-p{color:#d6d6d6}.mw_game_box2_h5{font-size:14px;font-weight:500;}.mw_game_box2_p{color:#d6d6d6;font-size:12px}@media(max-width:1200px){.mw_powerhouse_box .mw-p{padding-bottom:24px}.mw_powerhouse_box:before{opacity:.6}.mw_powerhouse_box2_img{height:100%;display:flex}.mw_powerhouse_list li{font-size:14px}.mw_powerhouse_list li:before{top:0;transform:unset}.mw_game_box2{padding:12px 16px 0;margin-top:14px}.mw_game_box{padding:20px 16px 0 16px}}@media(max-width:991px){.mw_game_col_ord{order:4;padding-bottom:0}}@media(max-width:768px){.mw_powerhouse_box:before{display:none}.mw_powerhouse_h3{font-size:20px}.mw_powerhouse_box2_img{justify-content:end}.mw_powerhouse_box2{padding:24px 0 0 14px}}@media(max-width:600px){.mw_powerhouse_box2_img{display:none;}.mw_powerhouse_box2{padding:24px 0 12px 16px;width:100%}}
 </style>
