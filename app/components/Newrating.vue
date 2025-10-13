@@ -84,7 +84,7 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', checkWidth)
 })
 
-const ratingItems: RatingKey[] = ['trustpilot', 'hostadvice', 'google']
+const ratingItems: RatingKey[] = ['google', 'trustpilot', 'hostadvice', ]
 </script>
 
 

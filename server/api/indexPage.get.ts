@@ -31,19 +31,20 @@ const siteBase = config.public.siteBase;
 
     //   Hero Section Data
     const hero = {
-        heading: `<h1>Web Hosting India</h1> - Up to ${discount}% off`,
-        headingH1: `<h1>Web Hosting India</h1> - Up to ${discount}% off`,
-        subheading: `<h2>Get fast and reliable hosting </h2> + Free domain`,
+        heading: `Up to ${discount}% Off <h1>Web Hosting India</h1>`,
+        headingH1: `Up to ${discount}% Off <h1>Web Hosting India</h1>`,
+        subheading: `<h2>MilesWeb — Where India hosts its websites</h2>`,
         bannerAlt:"India's Best Web Hosting Company | MilesWeb India",
         bannerImage:"/assets/images/mw/best-web-hosting.gif",
         features: [
-            "Free SSL and website migration",
-            "Free mailboxes and AI website builder",
-            {
-                text: '24/7 customer support',
-                position: 'right',
-                tip: `<img class="img-fluid pb-10" src="/assets/images/mw/tooltip/support.avif" alt="24/7 expert support | MilesWeb India" title="24/7 expert support | MilesWeb India" width="355" height="159" fetchpriority="high" decoding="async">Get real help, anytime! Our 24/7 expert support is available via live chat, email, and tickets—no chatbots, just real people.`
-            }
+            "Get a free .COM domain and SSL",
+            "Free emails and website migration",
+            "24/7 customer support",
+            // {
+            //     text: '24/7 customer support',
+            //     position: 'right',
+            //     tip: `<img class="img-fluid pb-10" src="/assets/images/mw/tooltip/support.avif" alt="24/7 expert support | MilesWeb India" title="24/7 expert support | MilesWeb India" width="355" height="159" fetchpriority="high" decoding="async">Get real help, anytime! Our 24/7 expert support is available via live chat, email, and tickets—no chatbots, just real people.`
+            // }
         ],
         currency: common.currencySymbol,
         strikePrice: false,
@@ -52,7 +53,7 @@ const siteBase = config.public.siteBase;
         freeMonthsText: '+3 months free',
         showTimer: false,
         showFreeTrial: false,
-        plansBtn: 'Start now',
+        plansBtn: 'See Plans & Prices',
         showPrice: true,
         guarantee: {
             text: 30,
