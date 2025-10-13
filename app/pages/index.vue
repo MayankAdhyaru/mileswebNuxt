@@ -14,8 +14,6 @@ const { plans } = await webUnlimitedPlan()
 
 // one global toggle for all plans
 
-
-
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 // ✅ SSR-fetch indexPage (rarely changes)
@@ -34,16 +32,16 @@ onMounted(async () => {
 
 // Extract hero data
 const headPayload = apiData.value?.head || {}
-const heroPayload = apiData?.value?.hero || {}
+const hero = apiData?.value?.hero || {}
 const planHeadingPayload = apiData?.value?.planHeading || {}
-const supportPayload = apiData.value?.support || {}
-const mpanelPayload = apiData.value?.mpanel || {}
-const migrationPayload = apiData.value?.migration || {}
-const whyChoosePayload = apiData.value?.whyChoose || {}
-const prodServPaylod = apiData.value?.productAndServices || {}
-const PowerHousePaylod = apiData.value?.PowerHouse || {}
-const FaqsPaylod = apiData.value?.faqs || {}
-const closingPaylod = apiData.value?.closing || {}
+const support = apiData.value?.support || {}
+const mpanel = apiData.value?.mpanel || {}
+const migration = apiData.value?.migration || {}
+const whyChoose = apiData.value?.whyChoose || {}
+const productAndServices = apiData.value?.productAndServices || {}
+const PowerHouse = apiData.value?.PowerHouse || {}
+const faqs = apiData.value?.faqs || {}
+const closing = apiData.value?.closing || {}
 
 // SEO for this page
 useHead({
@@ -68,43 +66,11 @@ useHead({
 })
 
 
-
-const hero = {
-  heading: heroPayload?.heading || `<h1>Web Hosting India</h1>`,
-  headingH1: heroPayload?.headingH1 || `<h1>Web Hosting India</h1>`,
-  subheading: heroPayload?.subheading || `<h2>Get fast and reliable hosting </h2> + Free domain`,
-  features: heroPayload?.features || ["Free SSL and website migration", "Free mailboxes and AI website builder"],
-  // Use hero payload if it defines currency; prefer common price as authoritative
-  currency: commonPayload.currencySymbol || '₹',
-  // prefer common price first, then hero payload, then default
-  price: commonPayload.price?.web_2?.[1] || heroPayload?.price || '49',
-  billingCycle: heroPayload?.billingCycle || "/mo",
-  freeMonthsText: heroPayload?.freeMonthsText || "+3 months free",
-  showPrice: typeof heroPayload?.showPrice !== 'undefined' ? heroPayload.showPrice : true,
-  bannerAlt:heroPayload.bannerAlt,
-  bannerImage:heroPayload.bannerImage,
-  plansBtn: heroPayload?.plansBtn || 'Start now',
-  // include guarantee etc. if present
-  guarantee: heroPayload?.guarantee || {}
-}
 const planHeading = {
     title:planHeadingPayload?.title || 'Choose your web hosting plan',
     description:planHeadingPayload?.description || 'All plans include a 30-day risk-free trial.',
 }
 
-const migration = {
-    title : migrationPayload.title || 'Free website migration, fully managed by Us',
-    description : migrationPayload.description || 'Our experts handle the technical aspects of moving your website, with data security at the utmost priority. So sit back and enjoy a stress-free transition to our platform without any additional costs.',
-    image : migrationPayload.image || '/assets/images/mw/migration.gif',
-    alt: migrationPayload.alt || 'Free website migration, fully managed by Us | MilesWeb India',
-    btn:{
-        text:migrationPayload.btn.text || 'Migrate now!',
-        link:migrationPayload.btn.link ||'',
-    }
-}
-
-// Rotating wave text (replaces legacy jQuery rolodex)
-// We'll keep the visible "active" item as the 5th child (index 4) just like the original.
 const waveItems = ref([
     'Speeds Up Websites.',
     'Assists You Anytime.',
@@ -168,180 +134,6 @@ onBeforeUnmount(() => {
     waveTimeouts.forEach(id => clearTimeout(id))
 })
 
-    const whyChoose = {
-        title : whyChoosePayload.title ||'Web hosting that works for you: Our unstoppable platform!',
-        description :whyChoosePayload.description ||`MilesWeb'The all-in-one web hosting solution is designed for speed, security, and the unique needs of the Indian market.`,
-        btn:{
-            text:whyChoosePayload.btn.text ||'Get Started',
-            link:whyChoosePayload.btn.link ||''
-        },
-        image:whyChoosePayload.image || '/assets/images/mw/smart-hosting.gif',
-        alt:whyChoosePayload.alt ||'Smart Hosting. Smarter Growth | MilesWeb India',
-        features:[
-            {
-                title:whyChoosePayload.features[0].title ||'Always secure with free SSL',
-                description:whyChoosePayload.features[0].description ||'Instantly protect your site and your visitors with our free SSL certificates.',
-                icons:{
-                    path:whyChoosePayload.features[0].icons.path ||'/assets/images/mw/security.png',
-                    alt:whyChoosePayload.features[0].icons.alt ||'Always secure with free SSL | MilesWeb India'
-                }
-            },
-            {
-                title:whyChoosePayload.features[1].title ||'All-in-one hosting toolkit',
-                description:whyChoosePayload.features[1].description ||'Everything you need in one dashboard without extra plugins or costs.',
-                icons:{
-                    path:whyChoosePayload.features[1].icons.path ||'/assets/images/mw/toolkit.png',
-                    alt:whyChoosePayload.features[1].icons.alt ||'All-in-one hosting toolkit | MilesWeb India'
-                }
-            },
-            {
-                title:whyChoosePayload.features[2].title ||'Zero-risk guarantee',
-                description:whyChoosePayload.features[2].description || `Try us for 30 days and if you're not 100% satisfied, get your money back.`,
-                icons:{
-                    path:whyChoosePayload.features[2].icons.path ||'/assets/images/mw/growing.png',
-                    alt:whyChoosePayload.features[2].icons.alt || 'Zero-risk guarantee | MilesWeb India'
-                }
-            },
-        ]
-    }
-    const productAndServices = {
-        title: prodServPaylod.title || 'Our high-grade, performance-powered products and services',
-        description: prodServPaylod.description || '',
-        tabs:[
-            {
-                text:prodServPaylod.tabs[0].text || 'Cloud Hosting',
-                image:prodServPaylod.tabs[0].image || '/assets/images/mw/cloud.svg"',
-                alt:prodServPaylod.tabs[0].alt || 'Cloud Hosting | MilesWeb India',
-            },
-            {
-                text:prodServPaylod.tabs[1].text || 'Business Email',
-                image:prodServPaylod.tabs[1].image || '/assets/images/mw/business-tab.svg',
-                alt:prodServPaylod.tabs[1].alt ||'Business Email | MilesWeb India',
-            },
-            {
-                text:prodServPaylod.tabs[2].text ||'Website Builder',
-                image:prodServPaylod.tabs[2].image || '/assets/images/mw/builder-tab.svg',
-                alt:prodServPaylod.tabs[2].alt ||'Website Builder | MilesWeb India',
-            },
-            {
-                text:prodServPaylod.tabs[3].text ||'Domain',
-                image:prodServPaylod.tabs[3].image || '/assets/images/mw/domain-tab.svg',
-                alt:prodServPaylod.tabs[3].alt ||'Domain | MilesWeb India',
-            }
-        ],
-        tabsContent:[
-            {
-                text:prodServPaylod.tabsContent[0].text ||'Fully optimized cloud hosting',
-                description:prodServPaylod.tabsContent[0].description ||'Our feature-rich cloud hosting plans optimally offer top-tier server specs and high uptime to ensure peak performance for your website around the clock.',
-                btn: {
-                    text: prodServPaylod.tabsContent[0].btn.text ||'View plans',
-                    link: prodServPaylod.tabsContent[0].btn.link ||'/hosting/cloud-hosting/',
-                },
-                image:prodServPaylod.tabsContent[0].image ||'/assets/images/mw/cloud-hosting.gif',
-                alt:prodServPaylod.tabsContent[0].alt ||'Fully optimized cloud hosting | MilesWeb India',
-            },
-            {
-                text:prodServPaylod.tabsContent[1].text ||'Professional email that grows with your business.',
-                description:prodServPaylod.tabsContent[1].description ||'Get custom business emails that match your brand and align with your domain.',
-                btn: {
-                    text: prodServPaylod.tabsContent[1].btn.text ||'Get Started',
-                    link: prodServPaylod.tabsContent[1].btn.link ||'/business-email',
-                },
-                image:prodServPaylod.tabsContent[1].image ||'/assets/images/mw/business-email.gif',
-                alt:prodServPaylod.tabsContent[1].alt ||'Professional email that grows with your business | MilesWeb India',
-            },
-            {
-                text:prodServPaylod.tabsContent[2].text ||'Build a professional website in minutes.',
-                description:prodServPaylod.tabsContent[2].description ||'Our AI website builder designs your site for a simplified online journey.',
-                btn: {
-                    text: prodServPaylod.tabsContent[2].btn.text ||'Build with AI',
-                    link: prodServPaylod.tabsContent[2].btn.link ||'/ai-website-builder',
-                },
-                image:prodServPaylod.tabsContent[2].image ||'/assets/images/mw/website-builder.gif',
-                alt:prodServPaylod.tabsContent[2].alt ||'Build a professional website in minutes | MilesWeb India',
-            },
-            {
-                text:prodServPaylod.tabsContent[3].text ||'A dream domain for a strong web presence.',
-                description:prodServPaylod.tabsContent[3].description ||'Our AI domain generator finds you the ideal domain name in seconds.',
-                btn: {
-                    text: prodServPaylod.tabsContent[3].btn.text ||'Get Your Domain',
-                    link: prodServPaylod.tabsContent[3].btn.link ||'/domains/',
-                },
-                image:prodServPaylod.tabsContent[3].image ||'/assets/images/mw/domain.gif',
-                alt:prodServPaylod.tabsContent[3].alt ||'A dream domain for a strong web presence | MilesWeb India',
-            }
-        ]
-    }
-
-    const faqs = {
-        title: FaqsPaylod.title || `Your web hosting questions answered`,
-        description:FaqsPaylod.description || `Got questions about our web hosting services? You'll find answers to the most common queries here.`,
-        faqlist:[
-            {
-                question:FaqsPaylod.faqlist[0].question ||`Where is MilesWeb based?`,
-                answer:FaqsPaylod.faqlist[0].answer ||`<p>Founded in 2012, MilesWeb is an Indian web hosting company headquartered in Nashik, Maharashtra. We provide best web hosting services globally with data centers in six countries including, India, the USA, the UK, Canada, Australia and Singapore. We are proud to be one of the top-rated hosts in the industry and are dedicated to raising the bar every day. You can learn more <a class='aclr' target='_blank' href='/about-us.php'>about us</a>.</p>`
-            },
-            {
-                question:FaqsPaylod.faqlist[1].question || `What features do I get with web hosting?`,
-                answer:FaqsPaylod.faqlist[1].answer || `<p>Our web hosting plans offer everything you need to start and succeed online. You get superfast and highly reliable web hosting services with impactful features such as NVMe storage, control panel and WordPress 1-click installer. A <a class='aclr' href='/domains/free-domain'>free domain</a>, website builder, and backups are included too. We provide 24/7 support to help you with any of your concerns related to web hosting.</p>`
-            },
-            {
-                question:FaqsPaylod.faqlist[2].question || `How is MilesWeb's technical support?`,
-                answer:FaqsPaylod.faqlist[2].answer || `<p>MilesWeb has proved itself as an award-winning web hosting provider with a stellar customer service record. The testimony is $ReviewCount positive customer reviews and ratings on major review sites like Google, Trustpilot, HostAdvice, HostReview, G2 and Serchen.</p><p>Additionally, you can check out our blogs, guides, and video tutorials that will help you gain insights and troubleshoot issues independently.</p>`
-            },
-            {
-                question:FaqsPaylod.faqlist[3].question || `Can I migrate my website to MilesWeb?`,
-                answer:FaqsPaylod.faqlist[3].answer || `<p>Yes! <a href='/hosting/website-migration' class='aclr'>Website migration</a> is absolutely a breeze with us! Our dedicated migration team will help you migrate your website from another hosting provider to MilesWeb at no extra cost. We ensure all your website data is preserved exactly as it is and moved to our servers seamlessly. Customers switch to MilesWeb for a better and faster hosting experience.</p>`
-            },
-            {
-                question:FaqsPaylod.faqlist[4].question || `Why Choose MilesWeb?`,
-                answer:FaqsPaylod.faqlist[4].answer || `<p>With over 13 years of expertise and innovation in the web hosting industry, MilesWeb is renowned for delivering blazing-fast page loads, ironclad security, and best web hosting services to customers globally. </p><p>We focus on offering customer-oriented solutions at the best price. With this, you get access to world-class support 24/7 available through email, live chat, and system ticket route. </p><p>Enjoy a 99.9% uptime, 30-day money back guarantee with best-in-class features such as unlimited free SSL, control panel, NVMe storage, 1-click installs, backups, and more which comes standard with our premium web hosting! This is one of the many ways MilesWeb sets the bar of excellence in helping businesses succeed. As an independent web hosting company, we have a track record of hosting over one million websites and earning the trust of over ${commonPayload.customerCount} customers worldwide.</p>`
-            },
-            {
-                question:FaqsPaylod.faqlist[5].question || `Can I upgrade my web hosting plan later?`,
-                answer:FaqsPaylod.faqlist[5].answer || `<p>Absolutely yes! You can upgrade your web hosting plan anytime. You only have to pay the difference amount; the upgrades will be done instantly. If you're just starting online, we recommend you to opt for our <a class='aclr' target='_blank' href='/hosting/cheap-web-hosting'>cheap web hosting</a> plan. It meets the requirements of entry-level websites and fits perfectly within your budget!</p>
-                <p>However, if you're expecting traffic surges or your existing plan has limited resources. At this point, you can upgrade to a higher plan, such as <a class='aclr' target='_blank' href='/hosting/cloud-hosting/'>cloud hosting</a>, <a class='aclr' target='_blank' href='/hosting/vps-hosting/'>VPS</a>, or a <a class='aclr' target='_blank' href='/hosting/dedicated-servers/'>dedicated server</a>, later.</p>
-                <p>You can get in touch with our customer support team, who will help you with the upgrade process. Also, you will get an email notification when your site outgrows its current hosting resources. </p>`
-            },
-            {
-                question:FaqsPaylod.faqlist[6].question || `What kind of web hosting services you offer?`,
-                answer:FaqsPaylod.faqlist[6].answer || `<p>We at MilesWeb, provide a range of powerful web hosting services that can host any website and cater to any requirements.</p>
-                <p><b>Shared Hosting:</b> Budget-friendly hosting option where multiple websites share resources on a single server. Ideal for first-timers and small to medium-sized websites.</p>
-                <p><b>VPS Hosting:</b> Wherein, one powerful physical server hosts multiple virtual servers, each isolated from the others. </p>
-                <p><b>Reseller Hosting:</b> A white-label approach to selling hosting services. MilesWeb offers 100% white-labeled reseller hosting allowing you to sell hosting under your own brand name.</p>
-                <p><b>Dedicated Hosting:</b> A type of web hosting wherein you get an entire physical server that’s completely dedicated to you.</p>
-                <p><b>Cloud Hosting:</b> Here your website/app is not deployed on a single server. Rather, a cluster of virtual and physical cloud servers is connected internally. This ensures higher flexibility and scalability.</p>
-                <p>You can choose a web hosting plan that best suits your requirements and budget!</p>`
-            },
-            {
-                question:FaqsPaylod.faqlist[7].question || `Is MilesWeb good for my business website?`,
-                answer:FaqsPaylod.faqlist[7].answer || `<p>Yes, you can definitely host your business website with MilesWeb hosting. We offer a range of powerful web hosting solutions specifically tailored for your business needs. Our feature-rich plans and exceptional customer support ensure your business website receives top-notch hosting services. </p>
-                <p>Whether you require shared hosting, cloud hosting, VPS, or dedicated server, our packages cater to various business needs and budgets. With our reliable infrastructure, high uptime, and fast loading speeds, we prioritize the performance and stability of your website. Our robust security measures protect your valuable data and information.</p>
-                <p>Our user-friendly control panel also empowers you to manage your website, <a class='aclr' href='/business-email'>business email</a> accounts, and databases easily. Further, our expert support team is available 24/7 to assist you with any technical queries or concerns. Choose MilesWeb hosting to empower your business website and experience exceptional performance and reliability.</p>`
-            },
-            {
-                question:FaqsPaylod.faqlist[8].question || `Are MilesWeb’s hosting services for non-techies?`,
-                answer:FaqsPaylod.faqlist[8].answer || `<p>Absolutely yes! By default, we offer fully <a href='/hosting/managed-web-hosting' class='aclr'>managed hosting services</a>. We handle the maintenance and manage the powerful hosting server, so you can completely focus on growing your business. Additionally, our technical experts are up for assistance no matter the day and time! We offer brilliant customer support 24/7 via live chat and email. Being non-tech savvy, rest assured, to receive the best support and hosting experience.</p>`
-            },
-            {
-                question:FaqsPaylod.faqlist[9].question || `What security measures do you include?`,
-                answer:FaqsPaylod.faqlist[9].answer || `<p>Security comes first at MilesWeb! We prioritize your website’s safety by incorporating the best security practices to protect it from threats and malware. Our servers are safeguarded with advanced security software, including Firewall, Malware Scanners, CageFS, BitNinja Server Security, Brute-force Protection, Web Application Firewall (WAF), Two-Factor Authentication (2FA) and more.</p><p>Additionally, our SSL certificates ensure secure encryption between website visitors and web browsers.</p>`
-            },
-            
-        ]
-    }
-
-        const closing = {
-            title :closingPaylod.title || `Ready to experience superior web hosting performance?`,
-            description :closingPaylod.description || `Hosting ${common.customerCount} clients’ websites and apps. We’re only missing yours! Compare our features with other hosting providers and see our customers choose us.`,
-            image:closingPaylod.image || `/assets/images/mw/experience.gif`,
-            alt:closingPaylod.alt || `Ready to experience superior web hosting performance | MilesWeb India`,
-            btn:{
-                text:closingPaylod.btn.text ||`Get Started Now`,
-                href:closingPaylod.btn.href ||``,
-            }
-    }
-
 </script>
 
 <template>
@@ -357,28 +149,28 @@ onBeforeUnmount(() => {
                     <div class="mw-col-lg-6 pr-30 pb-lg-30">
                     <div class="mw_focus_content">
                         <div class="pb-30">
-                            <h2 class="mw-h2" v-html="supportPayload.title"></h2>
-                            <p class="mw-p mw_sub_clr" v-html="supportPayload.description"></p>
+                            <h2 class="mw-h2" v-html="support.title"></h2>
+                            <p class="mw-p mw_sub_clr" v-html="support.description"></p>
                         </div>
                         <div class="d-flex mw_focus_row1">
-                            <span class="off-support-img"><img loading="lazy" :src="supportPayload.feature.image" :alt="supportPayload.feature.alt" :title="supportPayload.feature.alt" class="img-fluid"></span>
+                            <span class="off-support-img"><img loading="lazy" :src="support.feature.image" :alt="support.feature.alt" :title="support.feature.alt" class="img-fluid"></span>
                             <div class="pl-22">
-                                <div class="mw-h4 pb-6" v-html="supportPayload.feature.title"></div>
-                                <div class="mw_focus_h4_p mw-h3-p" v-html="supportPayload.feature.description"></div>
+                                <div class="mw-h4 pb-6" v-html="support.feature.title"></div>
+                                <div class="mw_focus_h4_p mw-h3-p" v-html="support.feature.description"></div>
                             </div>
                         </div>
                         <div class="d-flex pb-30">
-                            <span class="off-support-img"><img loading="lazy" :src="supportPayload.feature2.image" :alt="supportPayload.feature2.alt" :title="supportPayload.feature2.alt" class="img-fluid"></span>
+                            <span class="off-support-img"><img loading="lazy" :src="support.feature2.image" :alt="support.feature2.alt" :title="support.feature2.alt" class="img-fluid"></span>
                             <div class="pl-22">
-                                <div class="mw-h4 pb-6" v-html="supportPayload.feature2.title"></div>
-                                <div class="mw_focus_h4_p mw-h3-p" v-html="supportPayload.feature2.description"></div>
+                                <div class="mw-h4 pb-6" v-html="support.feature2.title"></div>
+                                <div class="mw_focus_h4_p mw-h3-p" v-html="support.feature2.description"></div>
                             </div>
                         </div>
-                        <a :href="supportPayload.btn.link" class="mw-btn" v-html="supportPayload.btn.text"></a>
+                        <a :href="support.btn.link" class="mw-btn" v-html="support.btn.text"></a>
                     </div>
                     </div>
                     <div class="mw-col-lg-6">
-                        <div class="title-center ho-global-img mw_support_img pt-md-24"><img class="img-fluid" :src="supportPayload.image" loading="lazy" :alt="supportPayload.feature2.alt" :title="supportPayload.feature2.alt"></div>
+                        <div class="title-center ho-global-img mw_support_img pt-md-24"><img class="img-fluid" :src="support.image" loading="lazy" :alt="support.feature2.alt" :title="support.feature2.alt"></div>
                     </div>
                 </div>
             </div>
@@ -390,44 +182,44 @@ onBeforeUnmount(() => {
             <div class="mw_account pt-90 pb-90">
                 <div class="mw-container">
                     <div class="title-center pb-45 mx-950">
-                        <h2 class="mw-h2 fff" v-html="mpanelPayload.title"></h2>
-                        <p class="mw-p fff" v-html="mpanelPayload.description"></p>
+                        <h2 class="mw-h2 fff" v-html="mpanel.title"></h2>
+                        <p class="mw-p fff" v-html="mpanel.description"></p>
                     </div>
                     <div class="title-center pb-45 mw_account_img">
-                        <img loading="lazy" :src="mpanelPayload.image" class="img-fluid" :alt="mpanelPayload.alt" :title="mpanelPayload.alt">
+                        <img loading="lazy" :src="mpanel.image" class="img-fluid" :alt="mpanel.alt" :title="mpanel.alt">
                     </div>
                     <div class="mw-row mw_account_row">
                         <div class="mw-col-lg-3 mw-col-sm-6 mw_account_col">
                             <div>
-                                <div class="pb-16"><img loading="lazy" :src="mpanelPayload.feature.image" class="img-fluid" :alt="mpanelPayload.feature.alt" :title="mpanelPayload.feature.alt" width="31" height="33"></div>
-                                <div class="mw-h4 fff" v-html="mpanelPayload.feature.title"></div>
-                                <p class="mw_account_h4_p" v-html="mpanelPayload.feature.description"></p>
+                                <div class="pb-16"><img loading="lazy" :src="mpanel.feature.image" class="img-fluid" :alt="mpanel.feature.alt" :title="mpanel.feature.alt" width="31" height="33"></div>
+                                <div class="mw-h4 fff" v-html="mpanel.feature.title"></div>
+                                <p class="mw_account_h4_p" v-html="mpanel.feature.description"></p>
                             </div>
                         </div>
                         <div class="mw-col-lg-3 mw-col-sm-6 mw_account_col">
                             <div>
-                                <div class="pb-16"><img loading="lazy" :src="mpanelPayload.feature2.image" class="img-fluid" :alt="mpanelPayload.feature2.alt" :title="mpanelPayload.feature2.alt" width="31" height="33"></div>
-                                <div class="mw-h4 fff" v-html="mpanelPayload.feature2.title"></div>
-                                <p class="mw_account_h4_p" v-html="mpanelPayload.feature2.description"></p>
+                                <div class="pb-16"><img loading="lazy" :src="mpanel.feature2.image" class="img-fluid" :alt="mpanel.feature2.alt" :title="mpanel.feature2.alt" width="31" height="33"></div>
+                                <div class="mw-h4 fff" v-html="mpanel.feature2.title"></div>
+                                <p class="mw_account_h4_p" v-html="mpanel.feature2.description"></p>
                             </div>
                         </div>
                         <div class="mw-col-lg-3 mw-col-sm-6 mw_account_col">
                             <div>
-                                <div class="pb-16"><img loading="lazy" :src="mpanelPayload.feature3.image" class="img-fluid" :alt="mpanelPayload.feature3.alt" :title="mpanelPayload.feature3.alt" width="31" height="33"></div>
-                                <div class="mw-h4 fff" v-html="mpanelPayload.feature3.title"></div>
-                                <p class="mw_account_h4_p" v-html="mpanelPayload.feature3.description"></p>
+                                <div class="pb-16"><img loading="lazy" :src="mpanel.feature3.image" class="img-fluid" :alt="mpanel.feature3.alt" :title="mpanel.feature3.alt" width="31" height="33"></div>
+                                <div class="mw-h4 fff" v-html="mpanel.feature3.title"></div>
+                                <p class="mw_account_h4_p" v-html="mpanel.feature3.description"></p>
                             </div>
                         </div>
                         <div class="mw-col-lg-3 mw-col-sm-6 mw_account_col">
                             <div>
-                                <div class="pb-16"><img loading="lazy" :src="mpanelPayload.feature4.image" class="img-fluid" :alt="mpanelPayload.feature4.alt" :title="mpanelPayload.feature4.alt" width="31" height="33"></div>
-                                <div class="mw-h4 fff" v-html="mpanelPayload.feature4.title"></div>
-                                <p class="mw_account_h4_p" v-html="mpanelPayload.feature4.description"></p>
+                                <div class="pb-16"><img loading="lazy" :src="mpanel.feature4.image" class="img-fluid" :alt="mpanel.feature4.alt" :title="mpanel.feature4.alt" width="31" height="33"></div>
+                                <div class="mw-h4 fff" v-html="mpanel.feature4.title"></div>
+                                <p class="mw_account_h4_p" v-html="mpanel.feature4.description"></p>
                             </div>
                         </div>
                     </div>
                     <div class="title-center mw_account_btn_border">
-                        <span class="mw-btn jump-to-plans" v-html="mpanelPayload.btn.text"></span>
+                        <span class="mw-btn jump-to-plans" v-html="mpanel.btn.text"></span>
                     </div>
                 </div>
             </div>
@@ -535,43 +327,43 @@ onBeforeUnmount(() => {
         <section class="pt-45 pb-45 px-md-6">
             <div class="mw-container">
                 <div class="title-center pb-45">
-                    <h2 class="mw-h2" v-html="PowerHousePaylod.title"></h2>
-                    <p class="mw-p" v-html="PowerHousePaylod.description"></p>
+                    <h2 class="mw-h2" v-html="PowerHouse.title"></h2>
+                    <p class="mw-p" v-html="PowerHouse.description"></p>
                 </div>
                 <div class="mw-row">
                     <!-- Feature 1: High-speed hosting -->
-                    <div class="mw-col-lg-4 mw-col-md-6 pb-30 d-flex mw_game_col_ord pt-lg-30 mw_mobile_none" v-if="PowerHousePaylod.features?.[0]">
+                    <div class="mw-col-lg-4 mw-col-md-6 pb-30 d-flex mw_game_col_ord pt-lg-30 mw_mobile_none" v-if="PowerHouse.features?.[0]">
                         <div class="mw_powerhouse_box">
                         <div>
                             <div class="pb-10">
-                            <img class="img-fluid" :src="PowerHousePaylod.features[0].image.path" loading="lazy" :alt="PowerHousePaylod.features[0].image.alt" :title="PowerHousePaylod.features[0].image.alt"/>
+                            <img class="img-fluid" :src="PowerHouse.features[0].image.path" loading="lazy" :alt="PowerHouse.features[0].image.alt" :title="PowerHouse.features[0].image.alt"/>
                             </div>
-                            <div class="mw_powerhouse_h3 fff" v-html="PowerHousePaylod.features[0].title"></div>
-                            <div class="mw-p fff" v-html="PowerHousePaylod.features[0].description"></div>
+                            <div class="mw_powerhouse_h3 fff" v-html="PowerHouse.features[0].title"></div>
+                            <div class="mw-p fff" v-html="PowerHouse.features[0].description"></div>
                         </div>
-                        <div v-if="PowerHousePaylod.features[0].btn.text">
-                            <a :href="PowerHousePaylod.features[0].btn.link" class="mw-btn mw-btn-white jump-to-plans" v-html="PowerHousePaylod.features[0].btn.text" ></a>
+                        <div v-if="PowerHouse.features[0].btn.text">
+                            <a :href="PowerHouse.features[0].btn.link" class="mw-btn mw-btn-white jump-to-plans" v-html="PowerHouse.features[0].btn.text" ></a>
                         </div>
                         </div>
                     </div>
 
                     <!-- Feature 2: Top website performance metrics -->
-                    <div class="mw-col-lg-8 pb-30 d-flex" v-if="PowerHousePaylod.features?.[1]">
+                    <div class="mw-col-lg-8 pb-30 d-flex" v-if="PowerHouse.features?.[1]">
                         <div class="mw_powerhouse_box2">
                         <div class="mw-row m0">
                             <div class="mw-col-md-6 p-0">
                             <div class="pb-10">
-                                <img class="img-fluid" :src="PowerHousePaylod.features[1].image.path" loading="lazy" :alt="PowerHousePaylod.features[1].image.alt" :title="PowerHousePaylod.features[1].image.alt" />
+                                <img class="img-fluid" :src="PowerHouse.features[1].image.path" loading="lazy" :alt="PowerHouse.features[1].image.alt" :title="PowerHouse.features[1].image.alt" />
                             </div>
-                            <div class="mw_powerhouse_h3" v-html="PowerHousePaylod.features[1].title"></div>
-                            <div class="mw-p mw_sub_clr pb-22" v-html="PowerHousePaylod.features[1].description"></div>
+                            <div class="mw_powerhouse_h3" v-html="PowerHouse.features[1].title"></div>
+                            <div class="mw-p mw_sub_clr pb-22" v-html="PowerHouse.features[1].description"></div>
                             <ul class="mw_powerhouse_list">
-                                <li v-for="(li, index) in PowerHousePaylod.features[1].list" :key="index" v-html="li"></li>
+                                <li v-for="(li, index) in PowerHouse.features[1].list" :key="index" v-html="li"></li>
                             </ul>
                             </div>
                             <div class="mw-col-md-6 p-0">
                             <div class="mw_powerhouse_box2_img title-right">
-                                <img class="img-fluid" :src="PowerHousePaylod.features[1].image.path2" loading="lazy" :alt="PowerHousePaylod.features[1].image.alt" :title="PowerHousePaylod.features[1].image.alt" />
+                                <img class="img-fluid" :src="PowerHouse.features[1].image.path2" loading="lazy" :alt="PowerHouse.features[1].image.alt" :title="PowerHouse.features[1].image.alt" />
                             </div>
                             </div>
                         </div>
@@ -579,22 +371,22 @@ onBeforeUnmount(() => {
                     </div>
 
                     <!-- Feature 3: Hosting that drives business growth -->
-                    <div class="mw-col-lg-8 d-flex" v-if="PowerHousePaylod.features?.[2]">
+                    <div class="mw-col-lg-8 d-flex" v-if="PowerHouse.features?.[2]">
                         <div class="mw_powerhouse_box2">
                         <div class="mw-row m0">
                             <div class="mw-col-md-6 p-0">
                             <div class="pb-10">
-                                <img class="img-fluid" :src="PowerHousePaylod.features[2].image.path" loading="lazy" :alt="PowerHousePaylod.features[2].image.alt" :title="PowerHousePaylod.features[2].image.alt" />
+                                <img class="img-fluid" :src="PowerHouse.features[2].image.path" loading="lazy" :alt="PowerHouse.features[2].image.alt" :title="PowerHouse.features[2].image.alt" />
                             </div>
-                            <div class="mw_powerhouse_h3" v-html="PowerHousePaylod.features[2].title"></div>
-                            <div class="mw-p mw_sub_clr pb-22" v-html="PowerHousePaylod.features[2].description"></div>
+                            <div class="mw_powerhouse_h3" v-html="PowerHouse.features[2].title"></div>
+                            <div class="mw-p mw_sub_clr pb-22" v-html="PowerHouse.features[2].description"></div>
                             <ul class="mw_powerhouse_list">
-                                <li v-for="(li, index) in PowerHousePaylod.features[2].list" :key="index" v-html="li"></li>
+                                <li v-for="(li, index) in PowerHouse.features[2].list" :key="index" v-html="li"></li>
                             </ul>
                             </div>
                             <div class="mw-col-md-6 p-0">
                             <div class="mw_powerhouse_box2_img title-right">
-                                <img class="img-fluid" :src="PowerHousePaylod.features[2].image.path2" loading="lazy" :alt="PowerHousePaylod.features[2].image.alt" :title="PowerHousePaylod.features[2].image.alt" />
+                                <img class="img-fluid" :src="PowerHouse.features[2].image.path2" loading="lazy" :alt="PowerHouse.features[2].image.alt" :title="PowerHouse.features[2].image.alt" />
                             </div>
                             </div>
                         </div>
@@ -603,25 +395,25 @@ onBeforeUnmount(() => {
 
                     <!-- Feature 4: Game-Changer for Speed -->
                     <div
-                        class="mw-col-lg-4 d-flex mw-col-md-6 pt-lg-30 mw_mobile_none" v-if="PowerHousePaylod.features?.[3]" >
+                        class="mw-col-lg-4 d-flex mw-col-md-6 pt-lg-30 mw_mobile_none" v-if="PowerHouse.features?.[3]" >
                         <div class="mw_game_box">
                             <div>
                                 <div class="pb-10">
                                     <img class="img-fluid" src="/assets/images/mw/star.svg" loading="lazy" alt="Game-Changer for Speed! | MilesWeb India" title="Game-Changer for Speed! | MilesWeb India" />
                                 </div>
-                                <div class="mw_powerhouse_h3 fff" v-html="PowerHousePaylod.features[3].title"></div>
-                                <div class="mw-p" v-html="PowerHousePaylod.features[3].description"></div>
+                                <div class="mw_powerhouse_h3 fff" v-html="PowerHouse.features[3].title"></div>
+                                <div class="mw-p" v-html="PowerHouse.features[3].description"></div>
                             </div>
 
                             <div class="mw_game_box2">
-                                <p class="fff mw-h3-p pb-22" v-html="PowerHousePaylod.features[3].list[0]"></p>
+                                <p class="fff mw-h3-p pb-22" v-html="PowerHouse.features[3].list[0]"></p>
                                 <div class="d-flex pb-30 mw-align-center">
                                 <span>
-                                    <img class="img-fluid" :src="PowerHousePaylod.features[3].image.path" loading="lazy" :alt="PowerHousePaylod.features[3].image.alt" :title="PowerHousePaylod.features[3].image.alt" width="54" height="54" />
+                                    <img class="img-fluid" :src="PowerHouse.features[3].image.path" loading="lazy" :alt="PowerHouse.features[3].image.alt" :title="PowerHouse.features[3].image.alt" width="54" height="54" />
                                 </span>
                                 <div class="pl-16">
-                                    <div class="mw_game_box2_h5 fff" v-html="PowerHousePaylod.features[3].list[1]"></div>
-                                    <span class="mw_game_box2_p" v-html="PowerHousePaylod.features[3].list[2]"></span>
+                                    <div class="mw_game_box2_h5 fff" v-html="PowerHouse.features[3].list[1]"></div>
+                                    <span class="mw_game_box2_p" v-html="PowerHouse.features[3].list[2]"></span>
                                 </div>
                                 </div>
                             </div>
@@ -631,9 +423,9 @@ onBeforeUnmount(() => {
             </div>
         </section>
         <!-- Customer Reviews Section  -->
-         <CustomerReviews/>
-         <FaqSection v-bind="faqs"/>
-         <closingSection v-bind="closing"/>
+        <CustomerReviews/>
+        <FaqSection v-bind="faqs"/>
+        <closingSection v-bind="closing"/>
     </div>
 </template>
 <style scoped>

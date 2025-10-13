@@ -27,16 +27,6 @@ export default defineEventHandler(() => {
       cloud_4:"Standard Cloud",
       cloud_5:"Advanced Cloud"
     },
-    strikePrice: {
-      web_1: ['', '399.00', '399.00', ''],
-      web_2: ['', '599.00', '599.00', ''],
-      web_3: ['', '799.00', '799.00', ''],
-      cloud_1: ['','1,499.00','1,499.00','1,499.00',''],
-      cloud_2: ['','2,799.00','2,799.00','2,799.00',''],
-      cloud_3: ['','4,999.00','4,999.00','4,999.00',''],
-      cloud_4: ['','2,799.00','2,799.00','2,799.00',''],
-      cloud_5: ['','4,999.00','4,999.00','4,999.00','']
-    },
     price: {
       web_1: ['', '79.00', '159.00', '399.00'],
       web_2: ['', '149.00', '219.00', '599.00'],
@@ -47,13 +37,23 @@ export default defineEventHandler(() => {
       cloud_4: ['','799.00','1,099.00','999.00','2,799.00'],
       cloud_5: ['','1,699.00','2,199.00','2,499.00','4,999.00']
     },
+    strikePrice: {
+      web_1: ['', '399.00', '399.00', ''],
+      web_2: ['', '599.00', '599.00', ''],
+      web_3: ['', '799.00', '799.00', ''],
+      cloud_1: ['','1,499.00','1,499.00','1,499.00',''],
+      cloud_2: ['','2,799.00','2,799.00','2,799.00',''],
+      cloud_3: ['','4,999.00','4,999.00','4,999.00',''],
+      cloud_4: ['','2,799.00','2,799.00','2,799.00',''],
+      cloud_5: ['','4,999.00','4,999.00','4,999.00','']
+    },
     ratingSection : {
-    showCode: true,
-    trustpilot: { rating: 4.9, count: "13,017", url: "https://www.trustpilot.com/review/milesweb.com", logo: "/assets/images/hosting/trustpilot.svg", newlogo: "/assets/images/mw/trustpilot.svg", alt: "Trustpilot | MilesWeb India"},
-    hostadvice: { rating: 4.6, count: "1,603", logo: "/assets/images/hosting/hostadvice.svg", newlogo: "/assets/images/mw/hostadvice.svg", alt: "Hostadvice | MilesWeb India" },
-    google: { rating: 4.5, count: "5,637", logo: "/assets/images/hosting/google.svg", newlogo: "/assets/images/mw/google.svg", alt: "Google | MilesWeb India" },
-    wordpressHighlight: { title: "Users' First Choice!", icon: "/assets/images/home/wordpress-websites.svg", show: true }
-  }
+        showCode: true,
+        trustpilot: { rating: 4.9, count: "13,017", url: "https://www.trustpilot.com/review/milesweb.com", logo: "/assets/images/hosting/trustpilot.svg", newlogo: "/assets/images/mw/trustpilot.svg", alt: "Trustpilot | MilesWeb India"},
+        hostadvice: { rating: 4.6, count: "1,603", logo: "/assets/images/hosting/hostadvice.svg", newlogo: "/assets/images/mw/hostadvice.svg", alt: "Hostadvice | MilesWeb India" },
+        google: { rating: 4.5, count: "5,637", logo: "/assets/images/hosting/google.svg", newlogo: "/assets/images/mw/google.svg", alt: "Google | MilesWeb India" },
+        wordpressHighlight: { title: "Users' First Choice!", icon: "/assets/images/home/wordpress-websites.svg", show: true }
+    }
   }
 
   // Helper functions

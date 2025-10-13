@@ -4,6 +4,11 @@ export default defineNuxtConfig({
     host: '0.0.0.0',
     port: 3000
   },
+  runtimeConfig: {
+    public: {
+      siteBase: 'https://www.milesweb.in',
+    }
+  },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   css: [

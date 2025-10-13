@@ -1,18 +1,28 @@
 export default defineEventHandler(async () => {
     // Fetch your common data
+    const config = useRuntimeConfig();
+const siteBase = config.public.siteBase;
     const common = await $fetch('/api/common').catch(() => ({}));
+     function getDiscount(category, index = null) {
+    const arr = (common.discounts?.[category]) || [];
+    const cleaned = arr.filter(d => d && d !== '');
+    if (index !== null) return cleaned[index] || '';
+    const numbers = cleaned.map(d => parseInt(d)).filter(n => !isNaN(n));
+    return numbers.length ? Math.max(...numbers) : '';
+  }
 
+  const discount = getDiscount('web_hosting'); // ✅ Now works!
     //   Meta Data For Page
     const head = {
-        title: `India's Best Web Hosting Company | ${common.getDiscount?.('web_hosting')}% OFF Web Hosting Services`,
+        title: `India's Best Web Hosting Company | ${discount}% OFF Web Hosting Services`,
         description: "Host smarter with India's best web hosting services. SSD NVMe storage, FREE AI website builder, Domain, SSL, migration & 24/7 support—all at affordable prices.",
-        ogTitle: `India's Best Web Hosting Company | ${common.getDiscount?.('web_hosting')}% OFF Web Hosting Services`,
+        ogTitle: `India's Best Web Hosting Company | ${discount}% OFF Web Hosting Services`,
         ogDescription: "Host smarter with India's best web hosting services. SSD NVMe storage, FREE AI website builder, Domain, SSL, migration & 24/7 support—all at affordable prices.",
         link: [
-            { rel: "canonical", href: "https://www.milesweb.in" },
+            { rel: "canonical", href: siteBase },
             { rel: "alternate", href: "https://hi.milesweb.in", hreflang: "hi-IN" },
             { rel: "alternate", href: "https://www.milesweb.com", hreflang: "en-US" },
-            { rel: "alternate", href: "https://www.milesweb.in", hreflang: "en-IN" },
+            { rel: "alternate", href: siteBase, hreflang: "en-IN" },
             { rel: "alternate", href: "https://www.milesweb.co.uk", hreflang: "en-GB" },
             { rel: "alternate", href: "https://www.milesweb.ae/", hreflang: "en-AE" },
         ]
@@ -21,8 +31,8 @@ export default defineEventHandler(async () => {
 
     //   Hero Section Data
     const hero = {
-        heading: `<h1>Web Hosting India</h1> - Up to ${common.getDiscount?.('web_hosting')}% off`,
-        headingH1: `<h1>Web Hosting India</h1> - Up to ${common.getDiscount?.('web_hosting')}% off`,
+        heading: `<h1>Web Hosting India</h1> - Up to ${discount}% off`,
+        headingH1: `<h1>Web Hosting India</h1> - Up to ${discount}% off`,
         subheading: `<h2>Get fast and reliable hosting </h2> + Free domain`,
         bannerAlt:"India's Best Web Hosting Company | MilesWeb India",
         bannerImage:"/assets/images/mw/best-web-hosting.gif",

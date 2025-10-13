@@ -9,7 +9,7 @@ type RatingKey = 'trustpilot' | 'hostadvice' | 'google'
 
 interface RatingItem {
   rating: number
-  count: number
+  count: string
   url?: string
   logo?: string
   newlogo: string
@@ -21,23 +21,46 @@ interface RatingSection {
   trustpilot: RatingItem
   hostadvice: RatingItem
   google: RatingItem
+  wordpressHighlight?: any
 }
 
-const commonPayload = ref<{ ratingSection: RatingSection }>({
+interface CommonPayload {
+  cartUrl: string
+  customerCount: string
+  currencySymbol: string
+  discounts: Record<string, string[]>
+  plansName: Record<string, string>
+  price: Record<string, string[]>
+  strikePrice: Record<string, string[]>
+  ratingSection: RatingSection
+  save?: Record<string, string[]>
+}
+
+const commonPayload = ref<CommonPayload>({
+  cartUrl: '',
+  customerCount: '',
+  currencySymbol: '',
+  discounts: {},
+  plansName: {},
+  price: {},
+  strikePrice: {},
   ratingSection: {
     showCode: false,
-    trustpilot: { rating: 0, count: 0, url: '', logo: '', newlogo: '', alt: '' },
-    hostadvice: { rating: 0, count: 0, logo: '', newlogo: '', alt: ''  },
-    google: { rating: 0, count: 0, logo: '', newlogo: '', alt: ''  }
-  }
+    trustpilot: { rating: 0, count: '0', newlogo: '', alt: '' },
+    hostadvice: { rating: 0, count: '0', newlogo: '', alt: '' },
+    google: { rating: 0, count: '0', newlogo: '', alt: '' }
+  },
+  save: {}
 })
 
 onMounted(async () => {
   try {
-    const data = await $fetch('/api/common')
-    if (data?.common?.ratingSection) commonPayload.value = data.common
+    const data: CommonPayload = await $fetch('/api/common')
+    if (data) {
+      commonPayload.value = data
+    }
   } catch (err) {
-    console.error('Failed to fetch ratings:', err)
+    console.error('Failed to fetch common data:', err)
   }
 })
 
@@ -63,6 +86,7 @@ onBeforeUnmount(() => {
 
 const ratingItems: RatingKey[] = ['trustpilot', 'hostadvice', 'google']
 </script>
+
 
 <template>
   <div class="pt-90 mw-rating2">

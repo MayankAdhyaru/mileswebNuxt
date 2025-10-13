@@ -32,10 +32,8 @@ const features = [
 // Initialize from server-fetched payloads so SSR and client initial render match
 if (commonData?.value) {
   const payload: any = commonData.value
-  if (payload?.common?.price) {
-    milesPrice.value.price = payload.common.price
-    milesPrice.value.currency = payload.common.currency || '₹'
-  }
+  milesPrice.value.price = payload.price ?? milesPrice.value.price
+  milesPrice.value.currency = payload.currencySymbol ?? '₹'
 }
 
 if (renewalData?.value) {
