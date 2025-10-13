@@ -50,6 +50,10 @@ export default defineEventHandler(async () => {
             tip: `<img class="img-fluid pb-10" src="/assets/images/mw/tooltip/30-days.avif" alt="Money-Back Guarantee | MilesWeb" title="Money-Back Guarantee | MilesWeb" width="355" height="159">Customer satisfaction is our top priority here at MilesWeb! However, if something goes wrong, you can request a <b>refund within 30 days</b> of signup.`
         }
     };
+    const planHeading = {
+        title:'Choose your web hosting plan',
+        description:'<span>All plans include a 30-day risk-free trial.</span>'
+    }
 
     // Support Section data
     const support = {
@@ -372,5 +376,5 @@ export default defineEventHandler(async () => {
     }
     
 
-    return { hero, head, support, mpanel, migration, whyChoose, productAndServices, PowerHouse, faqs, closing};
+    return { hero, head, planHeading, support, mpanel, migration, whyChoose, productAndServices, PowerHouse, faqs, closing};
 });

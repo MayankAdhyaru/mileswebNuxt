@@ -3,6 +3,25 @@
 // existing imports + logic
 import { ref, onMounted, onUnmounted } from 'vue'
 
+const scrollToPlans = () => {
+  const el = document.getElementById('plansToJmp')
+  if (!el) return
+
+  const header = document.querySelector('header')
+  const offset = header?.offsetHeight || 80 // adjust offset if needed
+
+  const top = el.getBoundingClientRect().top + window.scrollY - offset
+  window.scrollTo({ top, behavior: 'smooth' })
+}
+
+const onClickJumpToPlans = (e) => {
+  // Check if the clicked element or any of its parents has the class 'jump-to-plans'
+  if (e.target.closest('.jump-to-plans')) {
+    scrollToPlans()
+  }
+}
+
+
 const baseUrl = 'https://www.milesweb.in/'
 const isMobile = ref(false)
 const openSections = ref(new Set())
@@ -23,9 +42,11 @@ function checkWidth() {
 onMounted(() => {
   checkWidth()
   window.addEventListener('resize', checkWidth)
+  document.addEventListener('click', onClickJumpToPlans)
 })
 onUnmounted(() => {
   window.removeEventListener('resize', checkWidth)
+  document.removeEventListener('click', onClickJumpToPlans)
 })
 
 // 👇 custom transition hooks for jQuery-like slide effect

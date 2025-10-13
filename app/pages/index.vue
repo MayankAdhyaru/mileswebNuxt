@@ -9,16 +9,13 @@ import FaqSection from '~/components/FaqSection.vue'
 import ProductAndServices from '~/components/ProductAndServices.vue'
 import closingSection from '~/components/closingSection.vue'
 import Plans from '~/components/Plans.vue'
-import { usePlans } from '~/composables/usePlans'
-const { plans } = await usePlans()
-const hidePlanList = true
-let index = 0
+import { webUnlimitedPlan } from '~/composables/webUnlimitedPlan'
+const { plans } = await webUnlimitedPlan()
 
 // one global toggle for all plans
-const showHiddenAll = ref(false)
-const toggleAll = () => {
-  showHiddenAll.value = !showHiddenAll.value
-}
+
+
+
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 // ✅ SSR-fetch indexPage (rarely changes)
@@ -36,8 +33,9 @@ onMounted(async () => {
 })
 
 // Extract hero data
-const heroPayload = apiData?.value?.hero || {}
 const headPayload = apiData.value?.head || {}
+const heroPayload = apiData?.value?.hero || {}
+const planHeadingPayload = apiData?.value?.planHeading || {}
 const supportPayload = apiData.value?.support || {}
 const mpanelPayload = apiData.value?.mpanel || {}
 const migrationPayload = apiData.value?.migration || {}
@@ -88,6 +86,10 @@ const hero = {
   plansBtn: heroPayload?.plansBtn || 'Start now',
   // include guarantee etc. if present
   guarantee: heroPayload?.guarantee || {}
+}
+const planHeading = {
+    title:planHeadingPayload?.title || 'Choose your web hosting plan',
+    description:planHeadingPayload?.description || 'All plans include a 30-day risk-free trial.',
 }
 
 const migration = {
@@ -345,26 +347,9 @@ onBeforeUnmount(() => {
 <template>
     <div>
         <Hero v-bind="hero" />
- <section class="pt-45 pb-90 px-md-6">
-      <!-- Plans list -->
-      <div class="plan-container plan-container-4col mw-justify-center mw-plan-slider">
-        <Plans v-for="(plan, i) in plans" :key="plan.id" :plan="plan" :index="index + i" :hidePlanList="hidePlanList" :showHiddenAll="showHiddenAll"/>
-      </div>
-
-      <!-- Global show/hide button -->
-      <div class="title-center plan_new_shadow position-relative">
-        <div
-          class="show-hidden-menu plan-view-btn plns-show-btn position-relative"
-          @click="toggleAll"
-        >
-          <div class="plan-view-btn-a">
-            <span>{{ showHiddenAll ? 'View less comparison' : 'View comparison' }}</span>
-          </div>
-        </div>
-      </div>
-  </section>
-      
         <Newrating />
+        <Plans :plans="plans" :planHeading="planHeading"/>
+    
         <!-- Support Section  -->
         <section class="pt-120 pb-45 px-md-6 mw_focus">
             <div class="mw-container mw_focus_box">
