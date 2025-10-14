@@ -2,6 +2,7 @@ export default defineEventHandler(() => {
   const common = {
     cartUrl :"https://cart.milesweb.com/hosting/index.php?a=add",
     customerCount: "60,000",
+    reviewCount: "16,000+",
     currencySymbol: "₹",
     discounts: {
       web_hosting: ['75%', '76%', '69%'],
@@ -28,7 +29,7 @@ export default defineEventHandler(() => {
       cloud_5:"Advanced Cloud"
     },
     price: {
-      web_1: ['', '79.00', '159.00', '399.00'],
+      web_1: ['', '99.00', '159.00', '399.00'],
       web_2: ['', '149.00', '219.00', '599.00'],
       web_3: ['', '249.00', '349.00', '799.00'],
       cloud_1: ['','599.00','699.00','799.00','1,499.00'],

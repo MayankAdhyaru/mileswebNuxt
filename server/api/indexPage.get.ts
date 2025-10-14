@@ -68,56 +68,56 @@ const siteBase = config.public.siteBase;
 
     // Support Section data
     const support = {
-        title: 'Get dependable business hosting with 24/7 support.',
-        description:'From 24/7 bilingual support to lightning-fast servers everything’s handled for you, stress-free.',
+        title: 'Always Here When You Need Us',
+        description:'Our friendly support team is available day and night to help you set up, migrate, or fix your website — fast and simple.',
         image:"/assets/images/mw/support.gif",
-        alt: "Real human support | MilesWeb India",
+        alt: "24/7 Support | MilesWeb India",
         feature:{
-            title:"Real human support",
-            description:"No chat-bots, get expert solutions from our professionals with high-end security.",
+            title:"24/7 Support",
+            description:"Live chat, email, and ticket support",
             image:"/assets/images/mw/support.png",
-            alt: "Real human support | MilesWeb India"
+            alt: "24/7 Support | MilesWeb India"
         },
         feature2:{
-            title:"Fully managed WordPress",
-            description:"We handle all the technical details so you can focus on your content.",
+            title:"96% Happiness Score",
+            description:"Based on 18,966 ratings from our customers",
             image:"/assets/images/mw/toolkit.png",
-            alt: "Fully managed WordPress | MilesWeb India"
+            alt: "96% Happiness Score | MilesWeb India"
         },
         btn:{
-            text:"Connect with experts",
+            text:"Explore MilesWeb plans",
             link:"javascript:void(Tawk_API.toggle())"
         }
     }
 
     const mpanel = {    
-        title: 'Refined mPanel for seamless hosting management',
-        description:'MilesWeb offers you an entire hosting toolkit in one intuitive dashboard.',
+        title: 'Manage everything from one dashboard',
+        description:'Our easy-to-use dashboard helps you manage your website, emails, and backups without any confusion. Just log in and start.',
         image:'/assets/images/mw/mpanel.png',
-        alt: 'Refined mPanel for seamless hosting management | MilesWeb India',
+        alt: 'Manage everything from one dashboard | MilesWeb India',
         feature:{
-            title:"Unified dashboard",
-            description:"Manage all your domains and websites from a single, intuitive control panel.",
-            image:"/assets/images/mw/domain-control.svg",
-            alt: "Unified dashboard | MilesWeb India"
+            title:"Install WordPress",
+            description:"Launch your site instantly with our one-click installer — just click and go live.",
+            image:"/assets/images/mw/install-wp.svg",
+            alt: "Install WordPress | MilesWeb India"
         },
         feature2:{
-            title:"Performance monitoring",
-            description:"Get real-time insights into your site's performance with a dedicated speed score.",
-            image:"/assets/images/mw/build.svg",
-            alt: "Performance monitoring | MilesWeb India"
+            title:"Create Emails",
+            description:"Create business emails in seconds and stay connected with your customers easily.",
+            image:"/assets/images/mw/email.svg",
+            alt: "Create Emails | MilesWeb India"
         },
         feature3:{
-            title:"Comprehensive tools",
-            description:"Manage your files, databases, and WordPress installation all from one dashboard.",
-            image:"/assets/images/mw/tools.svg",
-            alt: "Comprehensive tools | MilesWeb India"
+            title:"Manage Files",
+            description:"Upload, edit, and organize your website files easily from the control panel or via FTP.",
+            image:"/assets/images/mw/files.svg",
+            alt: "Manage Files | MilesWeb India"
         },
         feature4:{
-            title:"Seamless email setup",
-            description:"Create and manage all your <a class='aclr2' href='/professional-email'>professional email</a> accounts with ease.",
-            image:"/assets/images/mw/email.svg",
-            alt: "Seamless email setup | MilesWeb India"
+            title:"Daily Backups",
+            description:"Your site and emails are backed up daily. Restore your files instantly when needed.",
+            image:"/assets/images/mw/daily-backups.svg",
+            alt: "Daily Backups | MilesWeb India"
         },
         btn:{
             text:"Get Started Now",
@@ -126,19 +126,19 @@ const siteBase = config.public.siteBase;
     }
 
     const migration = {
-        title : 'Free website migration, fully managed by Us',
+        title : 'Free website migration, fully managed by MilesWeb',
         description : 'Our experts handle the technical aspects of moving your website, with data security at the utmost priority. So sit back and enjoy a stress-free transition to our platform without any additional costs.',
         image : '/assets/images/mw/migration.gif',
-        alt: 'Free website migration, fully managed by Us | MilesWeb India',
+        alt: 'Free website migration, fully managed by MilesWeb | MilesWeb India',
         btn:{
-            text:'Migrate now!',
+            text:'Start free migration',
             link:''
         }
     }
 
     const whyChoose = {
-        title : 'Web hosting that works for you: Our unstoppable platform!',
-        description : 'The all-in-one web hosting solution is designed for speed, security, and the unique needs of the Indian market.',
+        title : 'Your website’s safety is the MilesWeb priority',
+        description : 'We treat your website like it’s ours. Every hosting plan includes enterprise-grade protection against threats, so you can focus on your business.',
         btn:{
             text:'Get Started',
             link:''
@@ -147,27 +147,27 @@ const siteBase = config.public.siteBase;
         alt:'Smart Hosting. Smarter Growth | MilesWeb India',
         features:[
             {
-                title:'Always secure with free SSL',
-                description:'Instantly protect your site and your visitors with our free SSL certificates.',
+                title:'SSL and malware protection',
+                description:'',
                 icons:{
                     path:'/assets/images/mw/security.png',
-                    alt:'Always secure with free SSL | MilesWeb India'
+                    alt:'SSL and malware protection | MilesWeb India'
                 }
             },
             {
-                title:'All-in-one hosting toolkit',
-                description:'Everything you need in one dashboard without extra plugins or costs.',
+                title:'Spam-free business email',
+                description:'',
                 icons:{
                     path:'/assets/images/mw/toolkit.png',
-                    alt:'All-in-one hosting toolkit | MilesWeb India'
+                    alt:'Spam-free business email | MilesWeb India'
                 }
             },
             {
-                title:'Zero-risk guarantee',
-                description:`Try us for 30 days and if you're not 100% satisfied, get your money back.`,
+                title:'Daily automatic backups and WAF',
+                description:``,
                 icons:{
                     path:'/assets/images/mw/security.png',
-                    alt:'Zero-risk guarantee | MilesWeb India'
+                    alt:'Daily automatic backups and WAF | MilesWeb India'
                 }
             },
         ]
@@ -331,7 +331,7 @@ const siteBase = config.public.siteBase;
             },
             {
                 question:`How is MilesWeb's technical support?`,
-                answer:`<p>MilesWeb has proved itself as an award-winning web hosting provider with a stellar customer service record. The testimony is $ReviewCount positive customer reviews and ratings on major review sites like Google, Trustpilot, HostAdvice, HostReview, G2 and Serchen.</p><p>Additionally, you can check out our blogs, guides, and video tutorials that will help you gain insights and troubleshoot issues independently.</p>`
+                answer:`<p>MilesWeb has proved itself as an award-winning web hosting provider with a stellar customer service record. The testimony is ${common.reviewCount} positive customer reviews and ratings on major review sites like Google, Trustpilot, HostAdvice, HostReview, G2 and Serchen.</p><p>Additionally, you can check out our blogs, guides, and video tutorials that will help you gain insights and troubleshoot issues independently.</p>`
             },
             {
                 question:`Can I migrate my website to MilesWeb?`,
@@ -376,12 +376,12 @@ const siteBase = config.public.siteBase;
     }
 
     const closing = {
-            title :`Ready to experience superior web hosting performance?`,
-            description :`Hosting ${common.customerCount} clients’ websites and apps. We’re only missing yours! Compare our features with other hosting providers and see our customers choose us.`,
+            title :`Not ready to commit? That’s okay.`,
+            description :`Try MilesWeb risk-free — if you don’t love it, get your money back. Start your hosting journey today.`,
             image:`/assets/images/mw/experience.gif`,
-            alt:`Ready to experience superior web hosting performance | MilesWeb India`,
+            alt:`Not ready to commit? That’s okay. | MilesWeb India`,
             btn:{
-                text:`Get Started Now`,
+                text:`Grab the deal now`,
                 href:``,
             }
     }

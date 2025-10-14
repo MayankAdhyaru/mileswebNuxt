@@ -16,6 +16,7 @@ const milesRenewal = ref<string | number>('')
 const competitorCols = ref<Array<any>>([])
 
 const features = [
+'Company origin: India',
   'NVMe storage',
   'Website hosting limit',
   'Advanced WordPress optimization',
@@ -45,21 +46,21 @@ if (renewalData?.value) {
       logo: '/assets/images/mw/godaddy.svg',
       price: '329.00',
       renewal: '699.00',
-      features: [true, 10, false, true, false, false, false, false, false, false, false]
+      features: [false, true, 10, false, true, false, false, false, false, false, false, false]
     },
     {
       name: 'Hostinger',
       logo: '/assets/images/mw/hostinger.svg',
       price: '149.00',
       renewal: '449.00',
-      features: [false, 25, false, false, true, true, true, false, false, false, false]
+      features: [false, false, 25, false, false, true, true, true, false, false, false, false]
     },
     {
       name: 'Bluehost',
       logo: '/assets/images/mw/bluehost.svg',
       price: '279.00',
       renewal: '499.00',
-      features: [false, 'Unlimited', false, true, false, true, false, false, false, false, false]
+      features: [false, false, 'Unlimited', false, true, false, true, false, false, false, false, false]
     }
   ]
 
@@ -108,8 +109,8 @@ onBeforeUnmount(() => {
             <div class="pb-45 pt-45">
                 <div class="mw-container">
                     <div class="title-center pb-45">
-                        <h2 class="mw-h2">MilesWeb: More than a host. See why we have a better deal!</h2>
-                        <p class="mw-p">Not just a plan—we offer strategic premium web hosting services in India. Enjoy world-class features and unlock your business's full potential.</p>
+                        <h2 class="mw-h2">MilesWeb vs Others: Who delivers more value?</h2>
+                        <p class="mw-p">We’ve compared MilesWeb with leading hosts to help you make the smarter choice.</p>
                     </div>
                 </div>
 
@@ -124,9 +125,9 @@ onBeforeUnmount(() => {
                                         <tr>
                                             <td class="vps-pro-logos mw-h3-lg" style="border-radius: 20px 0 0 0;border-right:none;"></td>
                                         </tr>
-                                        <tr>
+                                        <!-- <tr>
                                             <td class="vps-pro-cost vps-pro-br-none"><b>Features</b></td>
-                                        </tr>
+                                        </tr> -->
                                         <tr v-for="(feat, idx) in features" :key="idx"><td>{{ feat }}</td></tr>
                                         <tr><td class="vps-pro-cost vps-pro-br-none"><b>Price</b></td></tr>
                                         <tr><td>Price per month</td></tr>
@@ -146,7 +147,8 @@ onBeforeUnmount(() => {
                                             </td>
                                         </tr>
 
-                                        <tr><td class="vps-pro-br-none"></td></tr>
+                                        <!-- <tr><td class="vps-pro-br-none"></td></tr> -->
+                                        <tr><td><i class="vps-pro-ys"></i></td></tr>
                                         <tr><td><i class="vps-pro-ys"></i></td></tr>
                                         <tr><td>25</td></tr>
                                         <tr><td><i class="vps-pro-ys"></i></td></tr>
@@ -179,10 +181,10 @@ onBeforeUnmount(() => {
                                                 <img class="no-hw-attribute" loading="lazy" :src="col.logo" :alt="col.name" :title="col.name" />
                                             </td>
                                         </tr>
-                                        <tr><td class="vps-pro-br-none"></td></tr>
+                                        <!-- <tr><td class="vps-pro-br-none"></td></tr> -->
 
                                         <tr><td><i :class="col.features[0] ? 'vps-pro-ys' : 'vps-pro-no'"></i></td></tr>
-                                        <tr><td>{{ col.features[1] ?? '' }}</td></tr>
+                                        <tr><td><i :class="col.features[1] ? 'vps-pro-ys' : 'vps-pro-no'"></i></td></tr>
                                         <tr><td><i :class="col.features[2] ? 'vps-pro-ys' : 'vps-pro-no'"></i></td></tr>
                                         <tr><td><i :class="col.features[3] ? 'vps-pro-ys' : 'vps-pro-no'"></i></td></tr>
                                         <tr><td><i :class="col.features[4] ? 'vps-pro-ys' : 'vps-pro-no'"></i></td></tr>
@@ -192,6 +194,7 @@ onBeforeUnmount(() => {
                                         <tr><td><i :class="col.features[8] ? 'vps-pro-ys' : 'vps-pro-no'"></i></td></tr>
                                         <tr><td><i :class="col.features[9] ? 'vps-pro-ys' : 'vps-pro-no'"></i></td></tr>
                                         <tr><td><i :class="col.features[10] ? 'vps-pro-ys' : 'vps-pro-no'"></i></td></tr>
+                                        <tr><td><i :class="col.features[11] ? 'vps-pro-ys' : 'vps-pro-no'"></i></td></tr>
                                         <tr><td class="vps-pro-cost vps-pro-br-none"></td></tr>
                                         <tr><td><b class="vps-pro-price">{{ milesPrice.currency }}{{ col.price }}</b></td></tr>
                                         <tr><td><b>{{ milesPrice.currency }}{{ col.renewal }}</b></td></tr>

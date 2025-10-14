@@ -15,6 +15,12 @@ const { plans } = await webUnlimitedPlan()
 // one global toggle for all plans
 
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+const isTab = ref(false)
+function checkWidth() {
+  if (typeof window !== 'undefined') {
+    isTab.value = window.innerWidth <= 992
+  }
+}
 
 // ✅ SSR-fetch indexPage (rarely changes)
 const { data: apiData } = await useAsyncData('hero', () => $fetch('/api/indexPage'))
@@ -125,11 +131,13 @@ function rotateWave() {
 }
 
 onMounted(() => {
+    window.addEventListener('resize', checkWidth) 
     // start rotation interval
     waveInterval = setInterval(rotateWave, WAVE_INTERVAL)
 })
 
 onBeforeUnmount(() => {
+    window.removeEventListener('resize', checkWidth)
     if (waveInterval) clearInterval(waveInterval)
     waveTimeouts.forEach(id => clearTimeout(id))
 })
@@ -140,7 +148,7 @@ onBeforeUnmount(() => {
     <div>
         <Hero v-bind="hero" />
         <Newrating />
-        <Plans :plans="plans" :planHeading="planHeading"/>
+        <Plans :plans="plans" :planHeading="planHeading" :index="1"/>
     
         <!-- Support Section  -->
         <section class="pt-120 pb-45 px-md-6 mw_focus">
@@ -246,7 +254,7 @@ onBeforeUnmount(() => {
                         </div>
                         <div class="mw_smart_content_box">
                             <div class="mw_smart_content_zi1">
-                            <div class="d-flex" v-for="(feature, index) in whyChoose.features" :class="index < whyChoose.features.length - 1 ? 'mw_focus_row1' : ''" :key="index">
+                            <div class="d-flex mw-align-center" v-for="(feature, index) in whyChoose.features" :class="index < whyChoose.features.length - 1 ? 'mw_focus_row1' : ''" :key="index">
                                 <span class="off-support-img">
                                     <img :src="feature.icons.path" :alt="feature.icons.alt" :title="feature.icons.alt" class="img-fluid" loading="lazy">
                                 </span>
@@ -267,7 +275,7 @@ onBeforeUnmount(() => {
         </section>
         <ProductAndServices v-bind="productAndServices"/>
         <!-- Stisfaction Section  -->
-        <div class="sections-space">
+        <div v-if="!isTab" class="sections-space">
             <div class="mw_wave_box1">
                 <div class="mw-container">
                     <div class="d-flex mw-align-center mw-justify-center">
@@ -409,7 +417,7 @@ onBeforeUnmount(() => {
                                 <p class="fff mw-h3-p pb-22" v-html="PowerHouse.features[3].list[0]"></p>
                                 <div class="d-flex pb-30 mw-align-center">
                                 <span>
-                                    <img class="img-fluid" :src="PowerHouse.features[3].image.path" loading="lazy" :alt="PowerHouse.features[3].image.alt" :title="PowerHouse.features[3].image.alt" width="54" height="54" />
+                                    <img class="img-fluid" :src="PowerHouse.features[3].image.path" loading="lazy" :alt="PowerHouse.features[3].image.alt" :title="PowerHouse.features[3].image.alt" width="35" height="35" />
                                 </span>
                                 <div class="pl-16">
                                     <div class="mw_game_box2_h5 fff" v-html="PowerHouse.features[3].list[1]"></div>

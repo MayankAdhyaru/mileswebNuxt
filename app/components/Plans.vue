@@ -13,6 +13,10 @@ const props = defineProps({
   planHeading: {
     type: Object,
     default: () => ({ title: '', description: '' })
+  },
+  index: { // 👈 add this
+    type: Number,
+    default: 2 // fallback if not passed
   }
 })
 
@@ -168,8 +172,7 @@ const initTooltips = () => {
 
 const initialSlideIndex = computed(() => {
   return props.plans.findIndex((plan, index) => {
-    // This is where you define your condition for "Most Popular"
-    return index === 2 || plan?.isMostPopular || plan?.class === 'plan-recom-offer-col'
+    return index === props.index || plan?.isMostPopular || plan?.class === 'plan-recom-offer-col'
   })
 })
 
@@ -203,14 +206,14 @@ onBeforeUnmount(() => {
         :key="plan.pid || index"
         :class="[
           'plan-col hide_plan',
-          index === 2 ? 'plan-recom-offer-col' : '',
+           index === props.index ? 'plan-recom-offer-col' : '',
           [5, 6, 7, 8].includes(index) ? 'mw-sm-mt-plan' : '',
           {'mvh-plan-col-active' : showHiddenAll}
         ]"
       >
         <div class="mvh-plan-ttl-box" :class="{ 'mvh-plan-ttl-box-active': showHiddenAll }">
           <div class="position-relative">
-            <div v-if="index === 2" class="plan-best-deal">
+            <div v-if="index === props.index" class="plan-best-deal">
               <div class="plan-recom-h3">Most Popular</div>
             </div>
             <div class="title-right">
@@ -239,6 +242,8 @@ onBeforeUnmount(() => {
               <div class="mw-inline-block" v-html="plan.strike_price"></div>
             </div>
           </div>
+          <div class="vps_month_free" v-if="plan.free_months" data-tooltip="<b>Limited Time Offer!</b><br>Sign up for 4 years and enjoy 3 months of hosting absolutely free. More time, same price." rel="tooltip">{{ plan.free_months }}</div>
+          <div v-else class="vps_month_no_free">0 month free</div>
 
           <div class="plan-btn-box">
             <button
@@ -320,7 +325,7 @@ onBeforeUnmount(() => {
       >
       <div :class="[
           'plan-col hide_plan',
-          index === 2 ? 'plan-recom-offer-col' : '',
+           index === props.index ? 'plan-recom-offer-col' : '',
           [5, 6, 7, 8].includes(index) ? 'mw-sm-mt-plan' : '',
           {'mvh-plan-col-active' : showHiddenAll}
         ]" class="w-100">
