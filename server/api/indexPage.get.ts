@@ -25,7 +25,9 @@ const siteBase = config.public.siteBase;
             { rel: "alternate", href: siteBase, hreflang: "en-IN" },
             { rel: "alternate", href: "https://www.milesweb.co.uk", hreflang: "en-GB" },
             { rel: "alternate", href: "https://www.milesweb.ae/", hreflang: "en-AE" },
-        ]
+        ],
+        // Styles are loaded per-layout (home layout injects newmain.css on mount).
+        // Avoid injecting global layout CSS here to prevent duplicate/conflicting styles.
     };
 
 
