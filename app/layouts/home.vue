@@ -17,7 +17,7 @@ import Footer from '~/components/Footer.vue'
 // Load layout-specific CSS via head <link> so it only applies when this layout is used
 useHead({
   link: [
-    { rel: 'stylesheet', href: '/assets/css/newmain.css' }
+    { rel: 'stylesheet', href: '/css/newmain.css' }
   ]
 })
 </script>
