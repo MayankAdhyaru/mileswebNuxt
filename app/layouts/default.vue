@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import Header from '~/components/Header.vue'
+import Header from '~/components/common/Header.vue'
 import Footer from '~/components/Footer.vue'
 
 // Load layout-specific CSS via head <link> so it only applies when this layout is used

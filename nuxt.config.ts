@@ -4,6 +4,32 @@ export default defineNuxtConfig({
     host: '0.0.0.0',
     port: 3000
   },
+  modules: [
+    '@nuxt/image'
+  ],
+image: {
+    // Default image provider (auto = use local, static, or remote intelligently)
+    provider: 'ipx',
+    screens: {
+    xs: 320,
+    sm: 640,
+    md: 768,
+    lg: 1024,
+    xl: 1280,
+    '2xl': 1536
+    },
+    // domains: ['www.milesweb.in', 'www.milesweb.com', 'www.milesweb.co.uk', 'www.milesweb.ae'],
+     // Optional: presets to reuse frequently
+    presets: {
+      cover: {
+        modifiers: {
+          width: 800,
+          height: 400,
+          fit: 'cover'
+        }
+      }
+    }
+},
   runtimeConfig: {
     public: {
       siteBase: 'https://www.milesweb.in',
